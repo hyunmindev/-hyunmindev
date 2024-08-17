@@ -1,5 +1,5 @@
 {
-  "name": "hyunmindev",
+  "name": "hyunmin-dev",
   "private": true,
   "scripts": {
     "build": "turbo build",
