@@ -2,10 +2,6 @@
   "name": "@hyunmin-dev/style-guide",
   "version": "0.1.0",
   "private": true,
-  "exports": {
-    "./eslint/*": "./eslint/*.js",
-    "./prettier": "./prettier/index.js"
-  },
   "files": [
     "eslint",
     "prettier"
