@@ -7,6 +7,14 @@ module.exports = {
     'plugin:sonarjs/recommended-legacy',
     'plugin:prettier/recommended',
   ],
+  overrides: [
+    {
+      files: ['*.config.{mjs,ts,js}'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
+  ],
   rules: {
     'import/order': 'off',
     quotes: ['error', 'single'],

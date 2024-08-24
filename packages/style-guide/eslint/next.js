@@ -3,11 +3,7 @@ module.exports = {
   extends: [require.resolve('@vercel/style-guide/eslint/next')],
   overrides: [
     {
-      files: [
-        'app/**/page.{j,t}sx',
-        'app/**/layout.{j,t}sx',
-        'next.config.{mjs,ts}',
-      ],
+      files: ['page.{j,t}sx', 'layout.{j,t}sx'],
       rules: {
         'import/no-default-export': 'off',
       },

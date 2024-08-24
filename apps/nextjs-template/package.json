@@ -17,8 +17,8 @@
   "devDependencies": {
     "@hyunmin-dev/style-guide": "workspace:*",
     "@hyunmin-dev/tsconfig": "workspace:*",
-    "@types/node": "^22.4.0",
-    "@types/react": "^18.3.3",
+    "@types/node": "^22.5.0",
+    "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0"
   }
 }
