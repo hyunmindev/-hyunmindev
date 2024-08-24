@@ -4,26 +4,22 @@ const project = resolve(process.cwd(), 'tsconfig.json');
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  overrides: [
-    {
-      extends: [
-        require.resolve('@vercel/style-guide/eslint/typescript'),
-        'plugin:unicorn/recommended',
-      ],
-      files: ['*.ts', '*.tsx'],
-      parserOptions: {
+  extends: [
+    require.resolve('@vercel/style-guide/eslint/typescript'),
+    'plugin:unicorn/recommended',
+  ],
+  parserOptions: {
+    project,
+  },
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    'unicorn/prevent-abbreviations': ['error', { allowList: { env: true } }],
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
         project,
       },
-      rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
-      },
-      settings: {
-        'import/resolver': {
-          typescript: {
-            project,
-          },
-        },
-      },
     },
-  ],
+  },
 };
