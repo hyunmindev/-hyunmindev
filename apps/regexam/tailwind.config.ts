@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        mono: ['var(--font-geist-mono)', ...fontFamily.mono],
         sans: ['var(--font-geist-sans)', ...fontFamily.sans],
       },
     },

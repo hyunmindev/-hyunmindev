@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import { type ReactNode } from 'react';
 
 import '~/_styles/globals.css';
@@ -16,8 +16,11 @@ interface Properties {
 
 export default function Layout({ children }: Readonly<Properties>) {
   return (
-    <html className={GeistSans.variable} lang="en">
-      <body>{children}</body>
+    <html className={GeistMono.variable} lang="en">
+      <body>
+        <header>regexam</header>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

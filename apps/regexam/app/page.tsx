@@ -1,3 +1,8 @@
 export default function Page() {
-  return <div className="text-4xl">test9</div>;
+  return (
+    <>
+      <p className="font-mono">test1</p>
+      <p>test2</p>
+    </>
+  );
 }
