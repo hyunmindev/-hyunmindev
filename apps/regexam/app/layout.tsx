@@ -4,6 +4,8 @@ import '@hyunmin-dev/ui/globals.css';
 import { GeistMono } from 'geist/font/mono';
 import { type ReactNode } from 'react';
 
+import '~/_styles/globals.css';
+
 export const metadata: Metadata = {
   description: 'regexam',
   title: 'regexam',
