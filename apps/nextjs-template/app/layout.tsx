@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 
+import '@hyunmin-dev/ui/globals.css';
 import { GeistSans } from 'geist/font/sans';
 import { type ReactNode } from 'react';
-
-import '~/_styles/globals.css';
 
 export const metadata: Metadata = {
   description: 'description',
@@ -16,8 +15,11 @@ interface Properties {
 
 export default function Layout({ children }: Readonly<Properties>) {
   return (
-    <html className={GeistSans.variable} lang="en">
-      <body>{children}</body>
+    <html lang="en">
+      <body className={GeistSans.className}>
+        <header>template</header>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

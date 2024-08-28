@@ -4,18 +4,20 @@
     "./globals.css": "./src/globals.css",
     "./postcss.config": "./postcss.config.mjs",
     "./tailwind.config": "./tailwind.config.ts",
-    "./utils": "./utils.ts",
+    "./lib/*": "./src/lib/*.ts",
     "./components/*": [
-      "./components/*.tsx",
-      "./components/*.ts"
+      "./src/components/*.tsx",
+      "./src/components/*.ts"
     ]
   },
   "scripts": {
-    "add": "pnpm dlx shadcn-ui@latest add",
+    "add-component": "pnpm dlx shadcn-ui@latest add && eslint --fix src/components/ui/",
     "lint": "eslint ."
   },
   "prettier": "@hyunmin-dev/style-guide/prettier",
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@hyunmin-dev/style-guide": "workspace:*",
     "@hyunmin-dev/tsconfig": "workspace:*",
-    "@types/node": "^22.5.0"
+    "@types/node": "^22.5.0",
+    "@types/react": "^18.3.4"
   }
 }

@@ -10,5 +10,11 @@ module.exports = {
       extends: [require.resolve('@hyunmin-dev/style-guide/eslint/typescript')],
       files: ['*.ts', '*.tsx'],
     },
+    {
+      files: ['src/components/ui/**/*.tsx'],
+      rules: {
+        'unicorn/prevent-abbreviations': 'off',
+      },
+    },
   ],
 };

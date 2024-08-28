@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 
+import '@hyunmin-dev/ui/globals.css';
 import { GeistMono } from 'geist/font/mono';
 import { type ReactNode } from 'react';
-
-import '~/_styles/globals.css';
 
 export const metadata: Metadata = {
   description: 'regexam',
@@ -16,8 +15,8 @@ interface Properties {
 
 export default function Layout({ children }: Readonly<Properties>) {
   return (
-    <html className={GeistMono.variable} lang="en">
-      <body>
+    <html lang="en">
+      <body className={GeistMono.className}>
         <header>regexam</header>
         <main>{children}</main>
       </body>

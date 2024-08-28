@@ -5,7 +5,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "ui:add": "pnpm -F @hyunmin-dev/ui add",
+    "ui:add-component": "pnpm -F @hyunmin-dev/ui add-component",
     "gen-workspace": "turbo gen workspace --copy"
   },
   "devDependencies": {
