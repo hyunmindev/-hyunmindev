@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "analyze": "ANALYZE=true next build",
+    "prebuild": "prisma generate",
     "build": "next build",
+    "predev": "prisma generate",
     "dev": "next dev --turbo",
+    "generate": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "pull": "prisma db pull",
+    "push": "prisma db push",
+    "start": "next start",
+    "studio": "prisma studio"
   },
   "prettier": "@hyunmin-dev/style-guide/prettier",
   "dependencies": {
@@ -23,6 +30,7 @@
   "devDependencies": {
     "@hyunmin-dev/style-guide": "workspace:*",
     "@hyunmin-dev/tsconfig": "workspace:*",
+    "@next/bundle-analyzer": "^14.2.7",
     "@types/node": "^22.5.0",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",

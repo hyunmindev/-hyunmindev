@@ -13,7 +13,10 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'unicorn/prevent-abbreviations': ['error', { allowList: { env: true } }],
+    'unicorn/prevent-abbreviations': [
+      'error',
+      { allowList: { db: true, env: true } },
+    ],
   },
   settings: {
     'import/resolver': {
