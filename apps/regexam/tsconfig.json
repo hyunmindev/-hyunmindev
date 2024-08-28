@@ -1,5 +1,5 @@
 {
-  "extends": "@hyunmin-dev/tsconfig/nextjs.json",
+  "extends": "@hyunmin-dev/tsconfig/next.json",
   "compilerOptions": {
     "paths": {
       "~/*": ["./app/*"]

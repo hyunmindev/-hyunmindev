@@ -5,6 +5,7 @@ module.exports = {
     require.resolve('@hyunmin-dev/style-guide/eslint/node'),
     require.resolve('@hyunmin-dev/style-guide/eslint/react'),
     require.resolve('@hyunmin-dev/style-guide/eslint/next'),
+    require.resolve('@hyunmin-dev/style-guide/eslint/tailwind'),
   ],
   ignorePatterns: ['next-env.d.ts'],
   overrides: [
