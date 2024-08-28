@@ -1,0 +1,33 @@
+{
+  "name": "@hyunmin-dev/ui",
+  "exports": {
+    "./globals.css": "./src/globals.css",
+    "./postcss.config": "./postcss.config.mjs",
+    "./tailwind.config": "./tailwind.config.ts",
+    "./utils": "./utils.ts",
+    "./components/*": [
+      "./components/*.tsx",
+      "./components/*.ts"
+    ]
+  },
+  "scripts": {
+    "add": "pnpm dlx shadcn-ui@latest add",
+    "lint": "eslint ."
+  },
+  "prettier": "@hyunmin-dev/style-guide/prettier",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.436.0",
+    "postcss": "^8.4.41",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss": "^3.4.10",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@hyunmin-dev/style-guide": "workspace:*",
+    "@hyunmin-dev/tsconfig": "workspace:*",
+    "@types/node": "^22.5.0"
+  }
+}

@@ -4,7 +4,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "ui:add": "pnpm -F @hyunmin-dev/ui add",
+    "gen-workspace": "turbo gen workspace --copy"
   },
   "devDependencies": {
     "prettier": "^3.3.3",
