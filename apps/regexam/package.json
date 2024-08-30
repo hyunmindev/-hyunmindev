@@ -32,8 +32,8 @@
   "devDependencies": {
     "@hyunmin-dev/style-guide": "workspace:*",
     "@hyunmin-dev/tsconfig": "workspace:*",
-    "@next/bundle-analyzer": "^15.0.0-rc.0",
-    "@types/node": "^22.5.0",
+    "@next/bundle-analyzer": "15.0.0-rc.0",
+    "@types/node": "^22.5.1",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "postcss": "^8.4.41",
