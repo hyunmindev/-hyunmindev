@@ -16,7 +16,9 @@ module.exports = {
     },
   ],
   rules: {
+    'import/no-cycle': 'off',
     'import/order': 'off',
     quotes: ['error', 'single'],
+    'sonarjs/deprecation': 'off',
   },
 };
