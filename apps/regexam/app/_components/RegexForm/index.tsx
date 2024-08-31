@@ -25,7 +25,7 @@ export function RegexForm() {
 
   return (
     <Form {...form}>
-      <form className="w-96">
+      <form className="flex w-96 flex-col gap-4">
         <ProblemList control={form.control} />
         <FormField
           control={form.control}
