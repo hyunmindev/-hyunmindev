@@ -4,8 +4,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "ui:add-component": "pnpm -F @hyunmin-dev/ui add-component",
+    "lint": "turbo run lint -F=!@hyunmin-dev/ui",
+    "ui:add-component": "pnpm -F=@hyunmin-dev/ui add-component",
     "gen-workspace": "turbo gen workspace --copy"
   },
   "devDependencies": {
