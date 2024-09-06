@@ -4,20 +4,22 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint -F=!@hyunmin-dev/ui",
-    "ui:add-component": "pnpm -F=@hyunmin-dev/ui add-component",
-    "gen-workspace": "turbo gen workspace --copy"
+    "gen-workspace": "turbo gen workspace --copy",
+    "lint": "turbo run lint",
+    "ui": "pnpm -F=@hyunmin-dev/ui ui"
   },
+  "prettier": "@hyunmin-dev/style-guide/prettier",
   "devDependencies": {
+    "@hyunmin-dev/style-guide": "workspace:*",
     "prettier": "^3.3.3",
     "turbo": "^2.1.1",
     "typescript": "^5.5.4"
   },
   "packageManager": "pnpm@9.9.0",
-  "volta": {
-    "node": "20.17.0"
-  },
   "engines": {
     "node": ">=20"
+  },
+  "volta": {
+    "node": "20.17.0"
   }
 }

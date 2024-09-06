@@ -5,18 +5,15 @@
     "./postcss.config": "./postcss.config.mjs",
     "./tailwind.config": "./tailwind.config.ts",
     "./libs/*": "./src/libs/*.ts",
-    "./components/*": [
-      "./src/components/*.tsx",
-      "./src/components/*.ts"
-    ]
+    "./components/*": "./src/components/*.tsx"
   },
   "scripts": {
-    "add-component": "pnpm dlx shadcn-ui@latest add",
-    "lint": "eslint ."
+    "ui": "pnpm dlx shadcn-ui@latest"
   },
   "prettier": "@hyunmin-dev/style-guide/prettier",
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-separator": "^1.1.0",
