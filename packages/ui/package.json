@@ -8,7 +8,7 @@
     "./components/*": "./src/components/*.tsx"
   },
   "scripts": {
-    "ui": "pnpm dlx shadcn-ui@latest"
+    "ui": "pnpm dlx shadcn@latest"
   },
   "prettier": "@hyunmin-dev/style-guide/prettier",
   "dependencies": {
@@ -21,11 +21,11 @@
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.439.0",
+    "lucide-react": "^0.441.0",
     "postcss": "^8.4.45",
     "react-hook-form": "^7.53.0",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^3.4.11",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },
