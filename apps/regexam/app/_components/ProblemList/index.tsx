@@ -6,7 +6,7 @@ import { type Control, useWatch } from 'react-hook-form';
 
 import type { RegexFormInputs } from '~/_types/schemas';
 
-import { checkIsValidRegex } from '~/utils';
+import { checkIsValidRegex } from '~/_utils';
 
 interface Properties {
   control: Control<RegexFormInputs>;
