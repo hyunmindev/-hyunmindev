@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import '@hyunmin-dev/ui/globals.css';
 import { cn } from '@hyunmin-dev/ui/libs/utils';
-import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import { type ReactNode } from 'react';
 
 import '~/_styles/globals.css';
@@ -19,9 +19,7 @@ interface Properties {
 export default function Layout({ children }: Readonly<Properties>) {
   return (
     <html lang="ko">
-      <body className={cn(GeistMono.className, 'h-screen w-screen')}>
-        <main className="size-full p-4">{children}</main>
-      </body>
+      <body className={GeistSans.className}>{children}</body>
     </html>
   );
 }

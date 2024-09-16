@@ -13,6 +13,14 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      {
+        checksVoidReturn: {
+          attributes: false,
+        },
+      },
+    ],
     'unicorn/prevent-abbreviations': [
       'error',
       { allowList: { db: true, env: true } },

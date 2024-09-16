@@ -19,7 +19,9 @@ module.exports = {
   rules: {
     'import/no-cycle': 'off',
     'import/order': 'off',
+    'no-implicit-coercion': ['error', { allow: ['!!'] }],
     quotes: ['error', 'single'],
     'sonarjs/deprecation': 'off',
+    'sonarjs/no-misused-promises': 'off',
   },
 };
