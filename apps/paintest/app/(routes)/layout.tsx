@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 import '@hyunmin-dev/ui/globals.css';
-import { cn } from '@hyunmin-dev/ui/libs/utils';
 import { GeistSans } from 'geist/font/sans';
 import { type ReactNode } from 'react';
 
