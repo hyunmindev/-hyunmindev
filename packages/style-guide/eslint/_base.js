@@ -12,6 +12,7 @@ module.exports = {
       files: ['*.config.{mjs,ts,js}'],
       rules: {
         'import/no-default-export': 'off',
+        'import/no-named-as-default': 'off',
       },
     },
   ],
