@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import '@hyunmin-dev/ui/globals.css';
+import { cn } from '@hyunmin-dev/ui/libs/utils';
 import { GeistSans } from 'geist/font/sans';
 import { type ReactNode } from 'react';
 
@@ -18,7 +19,9 @@ interface Properties {
 export default function Layout({ children }: Readonly<Properties>) {
   return (
     <html lang="ko">
-      <body className={GeistSans.className}>{children}</body>
+      <body className={cn(GeistSans.className, 'm-auto max-w-screen-sm')}>
+        {children}
+      </body>
     </html>
   );
 }
