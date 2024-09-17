@@ -38,6 +38,9 @@ importers:
       jiti:
         specifier: ^1.21.6
         version: 1.21.6
+      lucide-react:
+        specifier: ^0.441.0
+        version: 0.441.0(react@18.3.1)
       next:
         specifier: ^14.2.11
         version: 14.2.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6621,6 +6624,10 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
+
+  lucide-react@0.441.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   lucide-react@0.441.0(react@19.0.0-rc-fb9a90fa48-20240614):
     dependencies:
