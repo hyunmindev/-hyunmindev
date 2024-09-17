@@ -1,58 +1,103 @@
 'use client';
 
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
-import { X } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { cn } from '@hyunmin-dev/ui/libs/utils';
+import { Eraser, Pencil, Redo, Trash2, Undo } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ReactSketchCanvas,
   type ReactSketchCanvasRef,
 } from 'react-sketch-canvas';
 
-const STROKE_COLORS = [
-  '#8B4513',
-  '#D2B48C',
-  '#228B22',
-  '#ADFF2F',
-  '#FF4500',
-  '#87CEEB',
-] as const;
-
 export default function Page() {
   const [result, setResult] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
-  const [strokeColor, setStrokeColor] = useState<
-    (typeof STROKE_COLORS)[number]
-  >(STROKE_COLORS[0]);
+  const [strokeColor, setStrokeColor] = useState<string>('#8B4513');
+  const [mode, setMode] = useState<'draw' | 'erase'>('draw');
+
   const canvasReference = useRef<ReactSketchCanvasRef>(null);
 
+  useEffect(() => {
+    canvasReference.current?.eraseMode(mode === 'erase');
+  }, [mode]);
+
   return (
-    <div className="flex size-full flex-col items-center gap-4 p-6">
+    <div className="flex size-full flex-col gap-4 p-6">
       <div className="flex flex-wrap gap-2">
-        {STROKE_COLORS.map((color) => (
-          <Button
-            className="rounded-full border"
-            key={color}
-            onClick={() => {
-              setStrokeColor(color);
+        <div className="size-10 overflow-hidden rounded-full border">
+          <input
+            className="size-[200%] -translate-x-1/4 -translate-y-1/4 appearance-none"
+            onChange={(event) => {
+              setStrokeColor(event.target.value);
             }}
-            size="icon"
-            style={{ backgroundColor: color }}
+            type="color"
+            value={strokeColor}
           />
-        ))}
+        </div>
         <Button
-          className="rounded-full"
+          className={cn('rounded-full', { 'bg-muted': mode === 'draw' })}
+          onClick={() => {
+            setMode('draw');
+          }}
+          size="icon"
+          variant="outline"
+        >
+          <Pencil
+            className={cn('stroke-border', {
+              'stroke-muted-foreground': mode === 'draw',
+            })}
+          />
+        </Button>
+        <Button
+          className={cn('rounded-full', { 'bg-muted': mode === 'erase' })}
+          onClick={() => {
+            setMode('erase');
+          }}
+          size="icon"
+          variant="outline"
+        >
+          <Eraser
+            className={cn('stroke-border', {
+              'stroke-muted-foreground': mode === 'erase',
+            })}
+          />
+        </Button>
+        <div className="grow" />
+        <Button
+          className="rounded-full border-muted-foreground"
+          onClick={() => {
+            canvasReference.current?.undo();
+          }}
+          size="icon"
+          variant="outline"
+        >
+          <Undo className="stroke-muted-foreground" />
+        </Button>
+        <Button
+          className="rounded-full border-muted-foreground"
+          onClick={() => {
+            canvasReference.current?.redo();
+          }}
+          size="icon"
+          variant="outline"
+        >
+          <Redo className="stroke-muted-foreground" />
+        </Button>
+        <Button
+          className="rounded-full border-destructive"
           onClick={() => {
             canvasReference.current?.resetCanvas();
           }}
           size="icon"
           variant="outline"
         >
-          <X className="stroke-border" />
+          <Trash2 className="stroke-destructive" />
         </Button>
       </div>
       <div className="h-96 w-full rounded-md border">
         <ReactSketchCanvas
           canvasColor="transparent"
+          eraserWidth={12}
           ref={canvasReference}
           strokeColor={strokeColor}
           style={{ border: 'unset' }}
@@ -91,7 +136,6 @@ export default function Page() {
         <Button
           className="w-full"
           onClick={() => {
-            canvasReference.current?.clearCanvas();
             setResult(undefined);
           }}
         >
