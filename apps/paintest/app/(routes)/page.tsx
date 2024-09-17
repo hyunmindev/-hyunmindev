@@ -84,7 +84,7 @@ export default function Page() {
             setIsLoading(false);
           }}
         >
-          분석하기
+          {isLoading ? '분석 중...' : '분석하기'}
         </Button>
       )}
       {!!result && (
