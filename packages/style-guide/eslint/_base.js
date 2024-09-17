@@ -12,12 +12,12 @@ module.exports = {
       files: ['*.config.{mjs,ts,js}'],
       rules: {
         'import/no-default-export': 'off',
-        'import/no-named-as-default': 'off',
       },
     },
   ],
   rules: {
     'import/no-cycle': 'off',
+    'import/no-named-as-default': 'off',
     'import/order': 'off',
     'no-implicit-coercion': ['error', { allow: ['!!'] }],
     quotes: ['error', 'single'],

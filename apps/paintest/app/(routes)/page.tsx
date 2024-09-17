@@ -20,6 +20,7 @@ export default function Page() {
           ref={canvasReference}
           strokeColor="#a855f7"
           style={{ border: 'unset' }}
+          withTimestamp
         />
       </div>
       {!result && (
@@ -28,17 +29,20 @@ export default function Page() {
           disabled={isLoading}
           onClick={async () => {
             setIsLoading(true);
-            const image = await canvasReference.current?.exportImage('jpeg');
+            const sketch = await canvasReference.current?.exportImage('jpeg');
+            const sketchingTime =
+              await canvasReference.current?.getSketchingTime();
+            const strokeCount = await canvasReference.current
+              ?.exportPaths()
+              .then((paths) => paths.length);
             const testResult = await fetch('/api/v1/test', {
-              body: JSON.stringify({
-                image,
-              }),
+              body: JSON.stringify({ sketch, sketchingTime, strokeCount }),
               method: 'POST',
             }).then<string>((response) => {
               if (response.ok) {
                 return response.json();
               }
-              throw new Error('Network response was not ok');
+              throw new Error('Failed to fetch');
             });
             setResult(testResult);
             setIsLoading(false);
