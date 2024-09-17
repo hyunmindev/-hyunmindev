@@ -15,7 +15,8 @@ const STROKE_COLORS = [
   '#ADFF2F',
   '#FF4500',
   '#87CEEB',
-];
+] as const;
+
 export default function Page() {
   const [result, setResult] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
