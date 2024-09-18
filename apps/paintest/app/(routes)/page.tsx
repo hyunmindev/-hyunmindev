@@ -2,6 +2,7 @@
 
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
 import { cn } from '@hyunmin-dev/ui/libs/utils';
+import { useMutation } from '@tanstack/react-query';
 import { Eraser, Pencil, Redo, Trash2, Undo } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -9,11 +10,11 @@ import {
   type ReactSketchCanvasRef,
 } from 'react-sketch-canvas';
 
+import { type AnalyzeBody } from '~/_types/api';
 import { metch } from '~/_utils/metch';
 
 export default function Page() {
   const [result, setResult] = useState<string>();
-  const [isLoading, setIsLoading] = useState(false);
   const [strokeColor, setStrokeColor] = useState<string>('#8B4513');
   const [mode, setMode] = useState<'draw' | 'erase'>('draw');
 
@@ -23,6 +24,15 @@ export default function Page() {
     canvasReference.current?.eraseMode(mode === 'erase');
   }, [mode]);
 
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: async (body: AnalyzeBody) =>
+      metch({
+        body,
+        method: 'POST',
+        path: '/api/v1/analyze',
+      }),
+  });
+
   return (
     <div className="flex size-full flex-col gap-4 p-6">
       <div className="flex flex-wrap gap-2">
@@ -31,6 +41,7 @@ export default function Page() {
             className="size-[200%] -translate-x-1/4 -translate-y-1/4 appearance-none"
             onChange={(event) => {
               setStrokeColor(event.target.value);
+              setMode('draw');
             }}
             type="color"
             value={strokeColor}
@@ -109,25 +120,25 @@ export default function Page() {
       {!result && (
         <Button
           className="w-full"
-          disabled={isLoading}
+          disabled={isPending}
           onClick={async () => {
-            setIsLoading(true);
             const canvas = canvasReference.current;
             const sketch = await canvas?.exportImage('jpeg');
             const sketchingTime = await canvas?.getSketchingTime();
-            const strokeCount = await canvas
-              ?.exportPaths()
-              .then((paths) => paths.length);
-            const testResult = await metch({
-              body: { sketch, sketchingTime, strokeCount },
-              method: 'POST',
-              path: '/api/v1/analyze',
+            const paths = await canvas?.exportPaths();
+            const strokeCount = paths?.length;
+            if (!sketch || !sketchingTime || !strokeCount) {
+              return;
+            }
+            const testResult = await mutateAsync({
+              sketch,
+              sketchingTime,
+              strokeCount,
             });
             setResult(testResult);
-            setIsLoading(false);
           }}
         >
-          {isLoading ? '분석 중...' : '분석하기'}
+          {isPending ? '분석 중...' : '분석하기'}
         </Button>
       )}
       {!!result && (
