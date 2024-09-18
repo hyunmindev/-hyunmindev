@@ -7,7 +7,7 @@
     "prettier"
   ],
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.2.11",
+    "@next/eslint-plugin-next": "^14.2.12",
     "@vercel/style-guide": "^6.0.0",
     "eslint": "8.57.1",
     "eslint-config-turbo": "^2.1.2",

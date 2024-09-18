@@ -116,7 +116,7 @@ export default function Page() {
             const strokeCount = await canvasReference.current
               ?.exportPaths()
               .then((paths) => paths.length);
-            const testResult = await fetch('/api/v1/test', {
+            const testResult = await fetch('/api/v1/analyze', {
               body: JSON.stringify({ sketch, sketchingTime, strokeCount }),
               method: 'POST',
             }).then<string>((response) => {
