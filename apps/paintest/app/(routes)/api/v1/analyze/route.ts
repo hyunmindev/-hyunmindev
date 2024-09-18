@@ -53,12 +53,12 @@ export const POST = async (request: NextRequest) => {
   if (!records?.[0]) {
     return Response.json('분석 결과를 저장할 수 없습니다.');
   }
-  const recordId = records[0].id;
+  const sketchId = records[0].id;
   const { data: image } = await supabase.storage
     .from('sketches')
-    .upload(`${recordId.toString()}.jpeg`, base64ToBlob(sketch));
+    .upload(`${sketchId.toString()}.jpeg`, base64ToBlob(sketch));
   if (!image) {
     return Response.json('분석 결과 이미지를 저장할 수 없습니다.');
   }
-  return Response.json(recordId);
+  return Response.json(sketchId);
 };

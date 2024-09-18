@@ -4,6 +4,7 @@ import { Button } from '@hyunmin-dev/ui/components/ui/button';
 import { cn } from '@hyunmin-dev/ui/libs/utils';
 import { useMutation } from '@tanstack/react-query';
 import { Eraser, Pencil, Redo, Trash2, Undo } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import {
   ReactSketchCanvas,
@@ -14,9 +15,9 @@ import { type AnalyzeBody } from '~/_types/api';
 import { metch } from '~/_utils/metch';
 
 export default function Page() {
-  const [result, setResult] = useState<string>();
   const [strokeColor, setStrokeColor] = useState<string>('#8B4513');
   const [mode, setMode] = useState<'draw' | 'erase'>('draw');
+  const router = useRouter();
 
   const canvasReference = useRef<ReactSketchCanvasRef>(null);
 
@@ -26,7 +27,7 @@ export default function Page() {
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: async (body: AnalyzeBody) =>
-      metch({
+      metch<string>({
         body,
         method: 'POST',
         path: '/api/v1/analyze',
@@ -117,46 +118,28 @@ export default function Page() {
           withTimestamp
         />
       </div>
-      {!result && (
-        <Button
-          className="w-full"
-          disabled={isPending}
-          onClick={async () => {
-            const canvas = canvasReference.current;
-            const sketch = await canvas?.exportImage('jpeg');
-            const sketchingTime = await canvas?.getSketchingTime();
-            const paths = await canvas?.exportPaths();
-            const strokeCount = paths?.length;
-            if (!sketch || !sketchingTime || !strokeCount) {
-              return;
-            }
-            const testResult = await mutateAsync({
-              sketch,
-              sketchingTime,
-              strokeCount,
-            });
-            setResult(testResult);
-          }}
-        >
-          {isPending ? '분석 중...' : '분석하기'}
-        </Button>
-      )}
-      {!!result && (
-        <Button
-          className="w-full"
-          onClick={() => {
-            setResult(undefined);
-          }}
-        >
-          다시하기
-        </Button>
-      )}
-      {!!result && (
-        <div
-          className="whitespace-pre-wrap rounded-md border p-4"
-          dangerouslySetInnerHTML={{ __html: result }}
-        />
-      )}
+      <Button
+        className="w-full"
+        disabled={isPending}
+        onClick={async () => {
+          const canvas = canvasReference.current;
+          const sketch = await canvas?.exportImage('jpeg');
+          const sketchingTime = await canvas?.getSketchingTime();
+          const paths = await canvas?.exportPaths();
+          const strokeCount = paths?.length;
+          if (!sketch || !sketchingTime || !strokeCount) {
+            return;
+          }
+          const sketchId = await mutateAsync({
+            sketch,
+            sketchingTime,
+            strokeCount,
+          });
+          router.push(`/sketches/${sketchId}`);
+        }}
+      >
+        {isPending ? '분석 중...' : '분석하기'}
+      </Button>
     </div>
   );
 }

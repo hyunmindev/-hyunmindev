@@ -1,14 +1,14 @@
 interface MetchParameters {
-  body: unknown;
-  method: 'GET' | 'POST';
+  body?: unknown;
+  method?: 'GET' | 'POST';
   path: string;
 }
 
-export const metch = ({ body, method, path }: MetchParameters) =>
+export const metch = <T>({ body, method, path }: MetchParameters) =>
   fetch(path, {
     body: JSON.stringify(body),
     method,
-  }).then<string>((response) => {
+  }).then<T>((response) => {
     if (response.ok) {
       return response.json();
     }
