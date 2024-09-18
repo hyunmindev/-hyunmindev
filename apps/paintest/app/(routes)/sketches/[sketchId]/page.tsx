@@ -32,6 +32,7 @@ export default async function Sketch({ params }: Readonly<Properties>) {
   const sketch = await readSketch(sketchId);
   return (
     <div className="flex size-full flex-col gap-4 p-6">
+      <h1 className="text-xl font-bold">나무로 본 심리 테스트 결과! 🎄</h1>
       <SketchToolbar />
       <div className="relative h-96 w-full rounded-md border">
         <Image

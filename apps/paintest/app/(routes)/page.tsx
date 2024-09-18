@@ -17,6 +17,7 @@ import { metch } from '~/_utils/metch';
 export default function Page() {
   const [strokeColor, setStrokeColor] = useState<string>('#8B4513');
   const [mode, setMode] = useState<'draw' | 'erase'>('draw');
+  const [error, setError] = useState<string>();
   const router = useRouter();
 
   const canvasReference = useRef<ReactSketchCanvasRef>(null);
@@ -36,11 +37,13 @@ export default function Page() {
 
   return (
     <div className="flex size-full flex-col gap-4 p-6">
+      <h1 className="text-xl font-bold">나무를 그려주세요! 🎄</h1>
       <div className="flex flex-wrap gap-2">
         <div className="size-10 overflow-hidden rounded-full border">
           <input
             className="size-[200%] -translate-x-1/4 -translate-y-1/4 appearance-none"
             onChange={(event) => {
+              setError(undefined);
               setStrokeColor(event.target.value);
               setMode('draw');
             }}
@@ -51,6 +54,7 @@ export default function Page() {
         <Button
           className={cn('rounded-full', { 'bg-muted': mode === 'draw' })}
           onClick={() => {
+            setError(undefined);
             setMode('draw');
           }}
           size="icon"
@@ -65,6 +69,7 @@ export default function Page() {
         <Button
           className={cn('rounded-full', { 'bg-muted': mode === 'erase' })}
           onClick={() => {
+            setError(undefined);
             setMode('erase');
           }}
           size="icon"
@@ -80,6 +85,7 @@ export default function Page() {
         <Button
           className="rounded-full border-muted-foreground"
           onClick={() => {
+            setError(undefined);
             canvasReference.current?.undo();
           }}
           size="icon"
@@ -90,6 +96,7 @@ export default function Page() {
         <Button
           className="rounded-full border-muted-foreground"
           onClick={() => {
+            setError(undefined);
             canvasReference.current?.redo();
           }}
           size="icon"
@@ -100,6 +107,7 @@ export default function Page() {
         <Button
           className="rounded-full border-destructive"
           onClick={() => {
+            setError(undefined);
             canvasReference.current?.resetCanvas();
           }}
           size="icon"
@@ -112,6 +120,9 @@ export default function Page() {
         <ReactSketchCanvas
           canvasColor="#FFFFFF"
           eraserWidth={12}
+          onStroke={() => {
+            setError(undefined);
+          }}
           ref={canvasReference}
           strokeColor={strokeColor}
           style={{ border: 'unset' }}
@@ -122,12 +133,17 @@ export default function Page() {
         className="w-full"
         disabled={isPending}
         onClick={async () => {
+          setError(undefined);
           const canvas = canvasReference.current;
           const sketch = await canvas?.exportImage('jpeg');
           const sketchingTime = await canvas?.getSketchingTime();
           const paths = await canvas?.exportPaths();
           const strokeCount = paths?.length;
           if (!sketch || !sketchingTime || !strokeCount) {
+            return;
+          }
+          if (strokeCount < 4 || sketchingTime < 2000) {
+            setError('정확한 테스트를 위해 조금만 더 그려주세요! 🎨');
             return;
           }
           const sketchId = await mutateAsync({
@@ -140,6 +156,7 @@ export default function Page() {
       >
         {isPending ? '분석 중...' : '분석하기'}
       </Button>
+      <p className="text-sm text-destructive">{error}</p>
     </div>
   );
 }
