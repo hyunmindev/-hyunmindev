@@ -23,5 +23,6 @@ module.exports = {
     quotes: ['error', 'single'],
     'sonarjs/deprecation': 'off',
     'sonarjs/no-misused-promises': 'off',
+    'sonarjs/no-redundant-type-constituents': 'off',
   },
 };

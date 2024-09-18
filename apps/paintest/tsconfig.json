@@ -3,7 +3,8 @@
   "compilerOptions": {
     "paths": {
       "~/*": ["./app/*"]
-    }
+    },
+    "declaration": false
   },
   "include": [
     "next-env.d.ts",

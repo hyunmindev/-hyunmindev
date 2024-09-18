@@ -5,7 +5,12 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["ANALYZE", "OPENAI_API_KEY"]
+      "env": [
+        "ANALYZE",
+        "OPENAI_API_KEY",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "NEXT_PUBLIC_SUPABASE_URL"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]

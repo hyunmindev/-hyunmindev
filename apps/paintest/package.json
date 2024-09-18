@@ -13,6 +13,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@hyunmin-dev/ui": "workspace:*",
+    "@supabase/ssr": "^0.5.1",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-query-next-experimental": "^5.56.2",
