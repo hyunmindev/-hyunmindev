@@ -140,7 +140,7 @@ export default function Page() {
           if (!sketch || !sketchingTime || !strokeCount) {
             return;
           }
-          if (strokeCount < 4 || sketchingTime < 2000) {
+          if (strokeCount < 5 || sketchingTime < 5000) {
             setError('정확한 테스트를 위해 조금만 더 그려주세요! 🎨');
             return;
           }

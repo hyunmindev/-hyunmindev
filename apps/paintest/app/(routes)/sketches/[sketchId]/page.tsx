@@ -1,4 +1,5 @@
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
+import { cn } from '@hyunmin-dev/ui/libs/utils';
 import { type Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -44,7 +45,12 @@ export default async function Sketch({ params }: Readonly<Properties>) {
         />
       </div>
       <div
-        className="whitespace-pre-wrap rounded-md border p-4"
+        className={cn(
+          'whitespace-pre-wrap rounded-md border p-4',
+          '[&>.alert]:text-sm [&>.alert]:text-muted-foreground',
+          '[&>h2]:text-lg [&>h2]:font-bold',
+          '[&>h1]:text-xl [&>h1]:font-bold',
+        )}
         dangerouslySetInnerHTML={{ __html: sketch.result }}
       />
       <div className="flex gap-2">
