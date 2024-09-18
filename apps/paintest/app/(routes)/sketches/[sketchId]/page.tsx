@@ -38,6 +38,7 @@ export default async function Sketch({ params }: Readonly<Properties>) {
         <Image
           alt="sketch"
           fill
+          objectFit="contain"
           src={`${SKETCH_IMAGE_BASE_URL}/${sketch.id.toString()}.jpeg`}
         />
       </div>
