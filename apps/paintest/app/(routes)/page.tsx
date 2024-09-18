@@ -39,7 +39,7 @@ export default function Page() {
     <div className="flex size-full flex-col gap-4 p-6">
       <h1 className="text-xl font-bold">나무를 그려주세요! 🎄</h1>
       <div className="flex flex-wrap gap-2">
-        <div className="size-10 overflow-hidden rounded-full border">
+        <div className="size-10 overflow-hidden rounded-md border">
           <input
             className="size-[200%] -translate-x-1/4 -translate-y-1/4 appearance-none"
             onChange={(event) => {
@@ -52,7 +52,7 @@ export default function Page() {
           />
         </div>
         <Button
-          className={cn('rounded-full', { 'bg-muted': mode === 'draw' })}
+          className={cn({ 'bg-muted': mode === 'draw' })}
           onClick={() => {
             setError(undefined);
             setMode('draw');
@@ -67,7 +67,7 @@ export default function Page() {
           />
         </Button>
         <Button
-          className={cn('rounded-full', { 'bg-muted': mode === 'erase' })}
+          className={cn({ 'bg-muted': mode === 'erase' })}
           onClick={() => {
             setError(undefined);
             setMode('erase');
@@ -83,7 +83,6 @@ export default function Page() {
         </Button>
         <div className="grow" />
         <Button
-          className="rounded-full border-muted-foreground"
           onClick={() => {
             setError(undefined);
             canvasReference.current?.undo();
@@ -94,7 +93,6 @@ export default function Page() {
           <Undo className="stroke-muted-foreground" />
         </Button>
         <Button
-          className="rounded-full border-muted-foreground"
           onClick={() => {
             setError(undefined);
             canvasReference.current?.redo();
@@ -105,7 +103,7 @@ export default function Page() {
           <Redo className="stroke-muted-foreground" />
         </Button>
         <Button
-          className="rounded-full border-destructive"
+          className="border-destructive"
           onClick={() => {
             setError(undefined);
             canvasReference.current?.resetCanvas();
@@ -116,7 +114,7 @@ export default function Page() {
           <Trash2 className="stroke-destructive" />
         </Button>
       </div>
-      <div className="h-96 w-full rounded-md border">
+      <div className="h-96 w-full overflow-hidden rounded-md border">
         <ReactSketchCanvas
           canvasColor="#FFFFFF"
           eraserWidth={12}

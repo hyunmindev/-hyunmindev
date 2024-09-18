@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
-import { Share2 } from 'lucide-react';
+import { Save, Share } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 export function SketchToolbar() {
@@ -11,7 +11,6 @@ export function SketchToolbar() {
   return (
     <div className="flex flex-wrap gap-2">
       <Button
-        className="flex rounded-full border-muted-foreground"
         onClick={() => {
           void navigator.share({
             text: '그림을 통해 분석된 심리 테스트 결과를 확인해보세요!',
@@ -22,7 +21,15 @@ export function SketchToolbar() {
         size="icon"
         variant="outline"
       >
-        <Share2 className="size-5 stroke-muted-foreground" />
+        <Share className="stroke-muted-foreground" />
+      </Button>
+      <Button size="icon" variant="outline">
+        <a
+          download="나무.jpeg"
+          href={`/storage/sketches/${sketchId.toString()}.jpeg`}
+        >
+          <Save className="stroke-muted-foreground" />
+        </a>
       </Button>
     </div>
   );

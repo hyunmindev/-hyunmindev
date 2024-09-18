@@ -13,13 +13,14 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig = withBundleAnalyzer({
-  images: {
-    remotePatterns: [
+  async rewrites() {
+    return [
       {
-        hostname: 'qqddcdkmxnhleprxiatl.supabase.co',
-        protocol: 'https',
+        destination:
+          'https://qqddcdkmxnhleprxiatl.supabase.co/storage/v1/object/public/:path*',
+        source: '/storage/:path*',
       },
-    ],
+    ];
   },
   transpilePackages: ['@hyunmin-dev/ui'],
 });
