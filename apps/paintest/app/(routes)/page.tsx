@@ -9,6 +9,8 @@ import {
   type ReactSketchCanvasRef,
 } from 'react-sketch-canvas';
 
+import { metch } from '~/_utils/metch';
+
 export default function Page() {
   const [result, setResult] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
@@ -96,7 +98,7 @@ export default function Page() {
       </div>
       <div className="h-96 w-full rounded-md border">
         <ReactSketchCanvas
-          canvasColor="transparent"
+          canvasColor="#FFFFFF"
           eraserWidth={12}
           ref={canvasReference}
           strokeColor={strokeColor}
@@ -110,20 +112,16 @@ export default function Page() {
           disabled={isLoading}
           onClick={async () => {
             setIsLoading(true);
-            const sketch = await canvasReference.current?.exportImage('jpeg');
-            const sketchingTime =
-              await canvasReference.current?.getSketchingTime();
-            const strokeCount = await canvasReference.current
+            const canvas = canvasReference.current;
+            const sketch = await canvas?.exportImage('jpeg');
+            const sketchingTime = await canvas?.getSketchingTime();
+            const strokeCount = await canvas
               ?.exportPaths()
               .then((paths) => paths.length);
-            const testResult = await fetch('/api/v1/analyze', {
-              body: JSON.stringify({ sketch, sketchingTime, strokeCount }),
+            const testResult = await metch({
+              body: { sketch, sketchingTime, strokeCount },
               method: 'POST',
-            }).then<string>((response) => {
-              if (response.ok) {
-                return response.json();
-              }
-              throw new Error('Failed to fetch');
+              path: '/api/v1/analyze',
             });
             setResult(testResult);
             setIsLoading(false);

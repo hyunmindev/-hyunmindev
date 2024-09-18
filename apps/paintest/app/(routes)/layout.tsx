@@ -26,8 +26,8 @@ export default function Layout({ children }: Readonly<Properties>) {
   return (
     <html className={nanumMyeongjo.className} lang="ko">
       <body className="m-auto max-w-screen-sm">
-        <Analytics />
         {children}
+        <Analytics />
       </body>
     </html>
   );
