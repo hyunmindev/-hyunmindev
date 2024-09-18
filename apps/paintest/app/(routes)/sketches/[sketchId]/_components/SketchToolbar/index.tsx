@@ -13,11 +13,11 @@ export function SketchToolbar() {
       <Button
         className="flex rounded-full border-muted-foreground"
         onClick={() => {
-          void navigator.clipboard.writeText(
-            `${window.location.origin}/sketches/${sketchId.toString()}`,
-          );
-          // eslint-disable-next-line no-alert -- 임시
-          alert('Copied to clipboard!');
+          void navigator.share({
+            text: '그림을 통해 분석된 심리 테스트 결과를 확인해보세요!',
+            title: 'AI 그림 심리 테스트',
+            url: `${window.location.origin}/sketches/${sketchId.toString()}`,
+          });
         }}
         size="icon"
         variant="outline"
