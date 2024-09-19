@@ -20,7 +20,7 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'import/order': 'off',
     'no-implicit-coercion': ['error', { allow: ['!!'] }],
-    quotes: ['error', 'single'],
+    quotes: ['error', 'single', { avoidEscape: true }],
     'sonarjs/deprecation': 'off',
     'sonarjs/no-misused-promises': 'off',
     'sonarjs/no-redundant-type-constituents': 'off',

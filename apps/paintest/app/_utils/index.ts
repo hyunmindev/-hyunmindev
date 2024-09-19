@@ -1,4 +1,4 @@
-export const base64ToBlob = (base64: string, mimeType = 'image/jpeg'): Blob => {
+export const base64ToBlob = (base64: string, mimeType = 'image/png') => {
   const base64Data = base64.split(',')[1];
   const byteCharacters = atob(base64Data ?? '');
   const byteNumbers: number[] = Array.from({ length: byteCharacters.length });

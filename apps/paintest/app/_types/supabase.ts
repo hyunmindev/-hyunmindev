@@ -21,7 +21,7 @@ export interface Database {
       sketches: {
         Insert: {
           createdAt?: string;
-          id?: number;
+          id: string;
           result: string;
           sketchingTime: number;
           strokeCount: number;
@@ -29,14 +29,14 @@ export interface Database {
         Relationships: [];
         Row: {
           createdAt: string;
-          id: number;
+          id: string;
           result: string;
           sketchingTime: number;
           strokeCount: number;
         };
         Update: {
           createdAt?: string;
-          id?: number;
+          id?: string;
           result?: string;
           sketchingTime?: number;
           strokeCount?: number;
@@ -121,7 +121,6 @@ export type TablesUpdate<
 export type Enums<
   PublicEnumNameOrOptions extends
     | { schema: keyof Database }
-    // eslint-disable-next-line -- false positive
     | keyof PublicSchema['Enums'],
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']

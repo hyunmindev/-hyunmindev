@@ -2,7 +2,7 @@ import * as supabase from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 import { env } from '~/_configs/env';
-import { type Database } from '~/_types/database.types';
+import { type Database } from '~/_types/supabase';
 
 export const createServerClient = () => {
   const cookieStore = cookies();

@@ -15,22 +15,15 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-misused-promises': [
       'error',
-      {
-        checksVoidReturn: {
-          attributes: false,
-        },
-      },
+      { checksVoidReturn: { attributes: false } },
     ],
+    '@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true }],
     'unicorn/prevent-abbreviations': [
       'error',
       { allowList: { db: true, env: true } },
     ],
   },
   settings: {
-    'import/resolver': {
-      typescript: {
-        project,
-      },
-    },
+    'import/resolver': { typescript: { project } },
   },
 };

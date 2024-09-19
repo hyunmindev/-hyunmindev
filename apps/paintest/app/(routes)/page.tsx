@@ -133,11 +133,11 @@ export default function Page() {
         onClick={async () => {
           setError(undefined);
           const canvas = canvasReference.current;
-          const sketch = await canvas?.exportImage('jpeg');
+          const image = await canvas?.exportImage('png');
           const sketchingTime = await canvas?.getSketchingTime();
           const paths = await canvas?.exportPaths();
           const strokeCount = paths?.length;
-          if (!sketch || !sketchingTime || !strokeCount) {
+          if (!image || !sketchingTime || !strokeCount) {
             return;
           }
           if (strokeCount < 5 || sketchingTime < 5000) {
@@ -145,7 +145,7 @@ export default function Page() {
             return;
           }
           const sketchId = await mutateAsync({
-            sketch,
+            image,
             sketchingTime,
             strokeCount,
           });

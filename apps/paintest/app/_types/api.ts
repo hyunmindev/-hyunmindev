@@ -1,5 +1,5 @@
 export interface AnalyzeBody {
-  sketch: string;
+  image: string;
   sketchingTime: number;
   strokeCount: number;
 }
