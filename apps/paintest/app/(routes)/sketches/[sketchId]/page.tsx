@@ -41,6 +41,7 @@ export default function Sketch({ params }: Readonly<Properties>) {
           alt="sketch"
           className="object-cover"
           fill
+          priority
           src={`/storage/sketches/${sketchId}`}
         />
       </div>
@@ -53,6 +54,11 @@ export default function Sketch({ params }: Readonly<Properties>) {
         </Link>
         <ShareButton />
       </div>
+      <Button variant="outline">
+        <Link href="https://www.buymeacoffee.com/hyunmin.dev">
+          ☕️ 커피 한 잔 사주기
+        </Link>
+      </Button>
     </>
   );
 }

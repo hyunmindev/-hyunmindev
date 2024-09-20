@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-import '@hyunmin-dev/ui/globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import { Gaegu } from 'next/font/google';
 import { type ReactNode } from 'react';
@@ -27,7 +26,7 @@ interface Properties {
 export default function Layout({ children }: Readonly<Properties>) {
   return (
     <html className={gaegu.className} lang="ko">
-      <body className="m-auto flex min-h-screen max-w-screen-sm flex-col bg-stone-200 text-xl text-stone-800">
+      <body className="m-auto flex min-h-screen max-w-screen-sm flex-col text-xl">
         <ReactQueryProvider>
           <main className="flex size-full grow flex-col gap-4 p-6">
             {children}

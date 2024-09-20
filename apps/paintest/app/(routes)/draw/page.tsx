@@ -55,7 +55,7 @@ export default function Draw() {
         </div>
         <Button
           className={cn({
-            'bg-muted border-muted-foreground border-2': mode === 'draw',
+            'bg-muted border-muted-foreground border': mode === 'draw',
           })}
           onClick={() => {
             setError(undefined);
@@ -72,7 +72,7 @@ export default function Draw() {
         </Button>
         <Button
           className={cn({
-            'bg-muted border-muted-foreground border-2': mode === 'erase',
+            'bg-muted border-muted-foreground border': mode === 'erase',
           })}
           onClick={() => {
             setError(undefined);
