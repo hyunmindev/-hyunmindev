@@ -20,7 +20,7 @@ import {
 import { type AnalyzeParameters } from '~/_types';
 import { metch } from '~/_utils/metch';
 
-export default function Page() {
+export default function Draw() {
   const [strokeColor, setStrokeColor] = useState<string>('#8B4513');
   const [mode, setMode] = useState<'draw' | 'erase'>('draw');
   const [error, setError] = useState<string>();

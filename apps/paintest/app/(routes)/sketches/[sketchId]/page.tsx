@@ -48,7 +48,7 @@ export default function Sketch({ params }: Readonly<Properties>) {
         <SketchResult sketchId={sketchId} />
       </Suspense>
       <div className="flex gap-2">
-        <Link className="grow" href="/">
+        <Link className="grow" href="/draw">
           <Button className="w-full">테스트하기</Button>
         </Link>
         <ShareButton />

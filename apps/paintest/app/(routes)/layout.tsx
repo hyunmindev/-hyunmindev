@@ -7,7 +7,7 @@ import { type ReactNode } from 'react';
 
 import '~/_styles/globals.css';
 
-import { ReactQueryProvider } from './_components';
+import { ReactQueryProvider } from './_components/ReactQueryProvider';
 
 const gaegu = Gaegu({
   display: 'block',
