@@ -50,9 +50,6 @@ importers:
       jiti:
         specifier: ^1.21.6
         version: 1.21.6
-      lucide-react:
-        specifier: ^0.441.0
-        version: 0.441.0(react@18.3.1)
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
@@ -72,8 +69,8 @@ importers:
         specifier: ^7.53.0
         version: 7.53.0(react@18.3.1)
       react-sketch-canvas:
-        specifier: ^6.2.0
-        version: 6.2.0(react@18.3.1)
+        specifier: ^7.0.0-next.4
+        version: 7.0.0-next.4(react@18.3.1)
       react-use:
         specifier: ^17.5.1
         version: 17.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3191,8 +3188,8 @@ packages:
       '@types/react':
         optional: true
 
-  react-sketch-canvas@6.2.0:
-    resolution: {integrity: sha512-Z56RQN0viV9W3Y+DpZfQMi2lf3pO+UB4l+cMwnx7j7pQ9WHkQwN+qZKVFGANgpjXQMyY42NODF/DXjuKPCMf1w==}
+  react-sketch-canvas@7.0.0-next.4:
+    resolution: {integrity: sha512-Njm/Kn/t8bPZuSmkuLNy4KyyyayjejqRGtct+9VA1OPHEyUfwNDU+HOr7VUlWnHPJBN9yJyTUyMc3kgRQkDMyg==}
     engines: {node: '>=10'}
     peerDependencies:
       react: '>=16.8'
@@ -6844,10 +6841,6 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  lucide-react@0.441.0(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-
   lucide-react@0.441.0(react@19.0.0-rc-fb9a90fa48-20240614):
     dependencies:
       react: 19.0.0-rc-fb9a90fa48-20240614
@@ -7196,7 +7189,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.7
 
-  react-sketch-canvas@6.2.0(react@18.3.1):
+  react-sketch-canvas@7.0.0-next.4(react@18.3.1):
     dependencies:
       react: 18.3.1
 

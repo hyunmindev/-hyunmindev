@@ -20,7 +20,7 @@
     --accent-foreground: 24 9.8% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 60 9.1% 97.8%;
-    --border: 20 5.9% 90%;
+    --border: 20 5.9% 80%;
     --input: 20 5.9% 90%;
     --ring: 20 14.3% 4.1%;
     --radius: 1rem;
@@ -56,5 +56,19 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+  }
+
+  h1 {
+    @apply text-3xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+}
+
+@layer components {
+  .simple-border {
+    @apply overflow-hidden rounded-md border-2 border-border;
   }
 }

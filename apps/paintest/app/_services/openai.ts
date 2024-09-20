@@ -1,4 +1,4 @@
-import type { AnalyzeBody } from '~/_types/api';
+import type { AnalyzeParameters } from '~/_types';
 
 import { openai } from '~/_configs/openai';
 import { SYSTEM_MESSAGE } from '~/_constants/messages';
@@ -7,7 +7,7 @@ export const analyze = async ({
   image,
   sketchingTime,
   strokeCount,
-}: AnalyzeBody) => {
+}: AnalyzeParameters) => {
   const completion = await openai.chat.completions.create({
     messages: [
       {

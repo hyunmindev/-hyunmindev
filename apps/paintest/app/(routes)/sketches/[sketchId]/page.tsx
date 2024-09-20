@@ -2,11 +2,12 @@ import { Button } from '@hyunmin-dev/ui/components/ui/button';
 import { type Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
-import { SketchResult } from '~/(routes)/sketches/[sketchId]/_components/SketchResult';
 import { selectSketch } from '~/_services/supabase';
 
 import { ShareButton } from './_components/ShareButton';
+import { SketchResult } from './_components/SketchResult';
 import { SketchToolbar } from './_components/SketchToolbar';
 
 interface Properties {
@@ -33,20 +34,22 @@ export default function Sketch({ params }: Readonly<Properties>) {
   const { sketchId } = params;
   return (
     <div className="flex size-full flex-col gap-4 p-6">
-      <h1 className="text-xl font-bold">나무로 본 심리 테스트 결과! 🎄</h1>
+      <h1>심리 테스트 결과! 🎄</h1>
       <SketchToolbar />
-      <div className="relative h-96 w-full overflow-hidden rounded-md border">
+      <div className="simple-border relative h-96 w-full">
         <Image
           alt="sketch"
-          className="object-contain"
+          className="object-cover"
           fill
           src={`/storage/sketches/${sketchId}`}
         />
       </div>
-      <SketchResult sketchId={sketchId} />
+      <Suspense>
+        <SketchResult sketchId={sketchId} />
+      </Suspense>
       <div className="flex gap-2">
         <Link className="grow" href="/">
-          <Button className="w-full">다시 그리기</Button>
+          <Button className="w-full">테스트하기</Button>
         </Link>
         <ShareButton />
       </div>

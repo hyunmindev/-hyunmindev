@@ -1,7 +1,7 @@
 'use client';
 
+import { Save, Share } from '@hyunmin-dev/ui/components/icons';
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
-import { Save, Share } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 export function SketchToolbar() {

@@ -2,21 +2,22 @@ import type { Metadata } from 'next';
 
 import '@hyunmin-dev/ui/globals.css';
 import { Analytics } from '@vercel/analytics/react';
-import { Nanum_Myeongjo as NanumMyeongjo } from 'next/font/google';
+import { Gaegu } from 'next/font/google';
 import { type ReactNode } from 'react';
 
-import { ReactQueryProvider } from '~/(routes)/_components';
 import '~/_styles/globals.css';
 
-const nanumMyeongjo = NanumMyeongjo({
+import { ReactQueryProvider } from './_components';
+
+const gaegu = Gaegu({
   display: 'block',
   subsets: ['latin'],
-  weight: '400',
+  weight: '300',
 });
 
 export const metadata: Metadata = {
   description: '나무 그림을 그려보세요. 당신의 심리를 알려줄게요. 🌳',
-  title: 'paintest',
+  title: 'AI 그림 심리 테스트',
 };
 
 interface Properties {
@@ -25,8 +26,8 @@ interface Properties {
 
 export default function Layout({ children }: Readonly<Properties>) {
   return (
-    <html className={nanumMyeongjo.className} lang="ko">
-      <body className="m-auto max-w-screen-sm">
+    <html className={gaegu.className} lang="ko">
+      <body className="m-auto max-w-screen-sm bg-stone-200 text-xl text-stone-800">
         <ReactQueryProvider>{children}</ReactQueryProvider>
         <Analytics />
       </body>

@@ -1,9 +1,15 @@
 'use client';
 
+import {
+  Eraser,
+  Pencil,
+  Redo,
+  Trash2,
+  Undo,
+} from '@hyunmin-dev/ui/components/icons';
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
 import { cn } from '@hyunmin-dev/ui/libs/utils';
 import { useMutation } from '@tanstack/react-query';
-import { Eraser, Pencil, Redo, Trash2, Undo } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -11,7 +17,7 @@ import {
   type ReactSketchCanvasRef,
 } from 'react-sketch-canvas';
 
-import { type AnalyzeBody } from '~/_types/api';
+import { type AnalyzeParameters } from '~/_types';
 import { metch } from '~/_utils/metch';
 
 export default function Page() {
@@ -27,19 +33,15 @@ export default function Page() {
   }, [mode]);
 
   const { isPending, mutateAsync } = useMutation({
-    mutationFn: async (body: AnalyzeBody) =>
-      metch<string>({
-        body,
-        method: 'POST',
-        path: '/api/v1/analyze',
-      }),
+    mutationFn: async (body: AnalyzeParameters) =>
+      metch<string>({ body, method: 'POST', path: '/api/v1/analyze' }),
   });
 
   return (
     <div className="flex size-full flex-col gap-4 p-6">
-      <h1 className="text-xl font-bold">나무를 그려주세요! 🎄</h1>
+      <h1>나무를 그려주세요! 🎄</h1>
       <div className="flex flex-wrap gap-2">
-        <div className="size-10 overflow-hidden rounded-md border">
+        <div className="simple-border size-10">
           <input
             className="size-[200%] -translate-x-1/4 -translate-y-1/4 appearance-none"
             onChange={(event) => {
@@ -52,7 +54,9 @@ export default function Page() {
           />
         </div>
         <Button
-          className={cn({ 'bg-muted': mode === 'draw' })}
+          className={cn({
+            'bg-muted border-muted-foreground border-2': mode === 'draw',
+          })}
           onClick={() => {
             setError(undefined);
             setMode('draw');
@@ -67,7 +71,9 @@ export default function Page() {
           />
         </Button>
         <Button
-          className={cn({ 'bg-muted': mode === 'erase' })}
+          className={cn({
+            'bg-muted border-muted-foreground border-2': mode === 'erase',
+          })}
           onClick={() => {
             setError(undefined);
             setMode('erase');
@@ -114,9 +120,10 @@ export default function Page() {
           <Trash2 className="stroke-destructive" />
         </Button>
       </div>
-      <div className="h-96 w-full overflow-hidden rounded-md border">
+      <div className="simple-border h-96 w-full">
         <ReactSketchCanvas
-          canvasColor="#FFFFFF"
+          canvasColor="transparent"
+          className="opacity-90"
           eraserWidth={12}
           onStroke={() => {
             setError(undefined);
@@ -133,10 +140,13 @@ export default function Page() {
         onClick={async () => {
           setError(undefined);
           const canvas = canvasReference.current;
-          const image = await canvas?.exportImage('png');
-          const sketchingTime = await canvas?.getSketchingTime();
-          const paths = await canvas?.exportPaths();
-          const strokeCount = paths?.length;
+          if (!canvas) {
+            return;
+          }
+          const image = await canvas.exportImage('png');
+          const sketchingTime = await canvas.getSketchingTime();
+          const paths = await canvas.exportPaths();
+          const strokeCount = paths.length;
           if (!image || !sketchingTime || !strokeCount) {
             return;
           }
