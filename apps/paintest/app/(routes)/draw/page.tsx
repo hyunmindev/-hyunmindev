@@ -44,10 +44,12 @@ export default function Draw() {
         <div className="simple-border size-10">
           <input
             className="size-[200%] -translate-x-1/4 -translate-y-1/4 appearance-none"
-            onChange={(event) => {
+            onBlur={() => {
               setError(undefined);
-              setStrokeColor(event.target.value);
               setMode('draw');
+            }}
+            onChange={(event) => {
+              setStrokeColor(event.target.value);
             }}
             type="color"
             value={strokeColor}
