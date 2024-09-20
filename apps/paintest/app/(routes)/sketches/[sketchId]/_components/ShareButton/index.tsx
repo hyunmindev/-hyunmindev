@@ -10,7 +10,7 @@ export function ShareButton() {
     <Button
       onClick={() => {
         void navigator.share({
-          text: '그림을 통해 분석된 심리 테스트 결과를 확인해보세요!',
+          text: '이 그림을 AI 심리 전문가가 분석한 결과를 확인해보세요!',
           title: 'AI 그림 심리 테스트',
           url: `${window.location.origin}/sketches/${sketchId}`,
         });
