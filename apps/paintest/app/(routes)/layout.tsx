@@ -27,8 +27,15 @@ interface Properties {
 export default function Layout({ children }: Readonly<Properties>) {
   return (
     <html className={gaegu.className} lang="ko">
-      <body className="m-auto max-w-screen-sm bg-stone-200 text-xl text-stone-800">
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+      <body className="m-auto flex min-h-screen max-w-screen-sm flex-col bg-stone-200 text-xl text-stone-800">
+        <ReactQueryProvider>
+          <main className="flex size-full grow flex-col gap-4 p-6">
+            {children}
+          </main>
+        </ReactQueryProvider>
+        <footer className="m-1 text-center text-sm">
+          ⓒ 2024. hyunmin All Rights Reserved.
+        </footer>
         <Analytics />
       </body>
     </html>

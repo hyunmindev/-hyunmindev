@@ -38,7 +38,7 @@ export default function Draw() {
   });
 
   return (
-    <div className="flex size-full flex-col gap-4 p-6">
+    <>
       <h1>나무를 그려주세요! 🎄</h1>
       <div className="flex flex-wrap gap-2">
         <div className="simple-border size-10">
@@ -165,6 +165,6 @@ export default function Draw() {
         {isPending ? '분석 중...' : '분석하기'}
       </Button>
       <p className="text-sm text-destructive">{error}</p>
-    </div>
+    </>
   );
 }

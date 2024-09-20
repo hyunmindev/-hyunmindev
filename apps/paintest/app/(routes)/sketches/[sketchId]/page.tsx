@@ -33,7 +33,7 @@ export async function generateMetadata({
 export default function Sketch({ params }: Readonly<Properties>) {
   const { sketchId } = params;
   return (
-    <div className="flex size-full flex-col gap-4 p-6">
+    <>
       <h1>심리 테스트 결과! 🎄</h1>
       <SketchToolbar />
       <div className="simple-border relative h-96 w-full">
@@ -53,6 +53,6 @@ export default function Sketch({ params }: Readonly<Properties>) {
         </Link>
         <ShareButton />
       </div>
-    </div>
+    </>
   );
 }
