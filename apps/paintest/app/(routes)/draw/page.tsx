@@ -5,9 +5,11 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import {
+  type CanvasPath,
   ReactSketchCanvas,
   type ReactSketchCanvasRef,
 } from 'react-sketch-canvas';
+import { useLocalStorage, useMount, useVibrate } from 'react-use';
 
 import { type AnalyzeParameters, type DrawMode } from '~/_types';
 import { getAnalyzeParameters } from '~/_utils';
@@ -17,10 +19,19 @@ import { DrawToolbox } from './_components/DrawToolbox';
 
 export default function Draw() {
   const canvasReference = useRef<ReactSketchCanvasRef>(null);
+
   const [strokeColor, setStrokeColor] = useState<string>('#8B4513');
   const [mode, setMode] = useState<DrawMode>('stroke');
   const [error, setError] = useState<string>();
+
   const router = useRouter();
+
+  const [localPaths, setLocalPaths, removeLocalPaths] =
+    useLocalStorage<CanvasPath[]>('paths');
+
+  useMount(() => {
+    canvasReference.current?.loadPaths(localPaths ?? []);
+  });
 
   useEffect(() => {
     canvasReference.current?.eraseMode(mode === 'erase');
@@ -29,6 +40,9 @@ export default function Draw() {
   useEffect(() => {
     setError(undefined);
   }, [mode, strokeColor]);
+
+  const [isComplete, setIsComplete] = useState(false);
+  useVibrate(isComplete, [50, 50], false);
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: async (body: AnalyzeParameters) =>
@@ -50,6 +64,7 @@ export default function Draw() {
     }
     try {
       const sketchId = await mutateAsync({ image, sketchingTime, strokeCount });
+      setIsComplete(true);
       router.push(`/sketches/${sketchId}`);
     } catch {
       setError('에러가 발생했습니다. 새로고침 해주세요. 😢');
@@ -70,6 +85,7 @@ export default function Draw() {
         onReset={() => {
           canvasReference.current?.resetCanvas();
           setError(undefined);
+          removeLocalPaths();
         }}
         onUndo={() => {
           canvasReference.current?.undo();
@@ -82,7 +98,9 @@ export default function Draw() {
           canvasColor="transparent"
           className="opacity-90"
           eraserWidth={12}
-          onStroke={() => {
+          onStroke={async () => {
+            const paths = await canvasReference.current?.exportPaths();
+            setLocalPaths(paths);
             setError(undefined);
           }}
           ref={canvasReference}
