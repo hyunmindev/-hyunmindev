@@ -3,3 +3,5 @@ export interface AnalyzeParameters {
   sketchingTime: number;
   strokeCount: number;
 }
+
+export type DrawMode = 'erase' | 'stroke';

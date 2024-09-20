@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
-import { selectSketch } from '~/_services/supabase';
+import { SKETCH_DESCRIPTION, TITLE } from '~/_constants/meta';
 
 import { ShareButton } from './_components/ShareButton';
 import { SketchResult } from './_components/SketchResult';
@@ -16,17 +16,14 @@ interface Properties {
   };
 }
 
-export async function generateMetadata({
-  params,
-}: Properties): Promise<Metadata> {
+export function generateMetadata({ params }: Properties): Metadata {
   const { sketchId } = params;
-  const sketch = await selectSketch({ sketchId });
   return {
-    description: '나무 그림으로 AI가 분석한 심리 테스트 결과입니다. 🌳',
+    description: SKETCH_DESCRIPTION,
     openGraph: {
-      images: [`/storage/sketches/${sketch.id}`],
+      images: [`/storage/sketches/${sketchId}`],
     },
-    title: 'AI 그림 심리 테스트',
+    title: TITLE,
   };
 }
 
@@ -39,7 +36,7 @@ export default function Sketch({ params }: Readonly<Properties>) {
       <div className="simple-border relative h-96 w-full">
         <Image
           alt="sketch"
-          className="object-cover"
+          className="object-contain"
           fill
           priority
           src={`/storage/sketches/${sketchId}`}

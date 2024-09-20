@@ -1,22 +1,17 @@
 import type { Metadata } from 'next';
 
 import { Analytics } from '@vercel/analytics/react';
-import { Gaegu } from 'next/font/google';
 import { type ReactNode } from 'react';
 
+import { DESCRIPTION, TITLE } from '~/_constants/meta';
+import { gaegu } from '~/_styles/fonts';
 import '~/_styles/globals.css';
 
 import { ReactQueryProvider } from './_components/ReactQueryProvider';
 
-const gaegu = Gaegu({
-  display: 'block',
-  subsets: ['latin'],
-  weight: '300',
-});
-
 export const metadata: Metadata = {
-  description: '나무 그림을 그려보세요. 당신의 심리를 알려줄게요. 🌳',
-  title: 'AI 그림 심리 테스트',
+  description: DESCRIPTION,
+  title: TITLE,
 };
 
 interface Properties {

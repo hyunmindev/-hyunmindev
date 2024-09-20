@@ -1,7 +1,7 @@
 import type { AnalyzeParameters } from '~/_types';
 
 import { openai } from '~/_configs/openai';
-import { SYSTEM_MESSAGE } from '~/_constants/messages';
+import { SYSTEM_MESSAGE } from '~/_constants/openai';
 
 export const analyze = async ({
   image,
