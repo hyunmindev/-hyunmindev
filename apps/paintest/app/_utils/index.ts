@@ -3,7 +3,7 @@ import type { ReactSketchCanvasRef } from 'react-sketch-canvas';
 import { type AnalyzeParameters } from '~/_types';
 
 export const base64ToBlob = (base64: string, mimeType = 'image/png') => {
-  const base64Data = base64.split(',')[1];
+  const [, base64Data] = base64.split(',');
   const byteCharacters = atob(base64Data ?? '');
   const byteNumbers: number[] = Array.from({ length: byteCharacters.length });
   for (let index = 0; index < byteCharacters.length; index += 1) {
