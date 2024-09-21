@@ -67,6 +67,7 @@ export default function Draw() {
     try {
       const sketchId = await mutateAsync({ image, sketchingTime, strokeCount });
       setIsComplete(true);
+      removeLocalPaths();
       router.push(`/sketches/${sketchId}`);
     } catch {
       setError('에러가 발생했습니다. 새로고침 해주세요. 😢');
