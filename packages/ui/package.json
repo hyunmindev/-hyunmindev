@@ -21,7 +21,7 @@
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.441.0",
+    "lucide-react": "^0.445.0",
     "postcss": "^8.4.47",
     "react-hook-form": "^7.53.0",
     "tailwind-merge": "^2.5.2",
