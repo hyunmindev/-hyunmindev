@@ -13,6 +13,9 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig = withBundleAnalyzer({
+  experimental: {
+    typedRoutes: true,
+  },
   async rewrites() {
     return [
       {

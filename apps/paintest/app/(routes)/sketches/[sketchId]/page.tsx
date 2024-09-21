@@ -45,17 +45,15 @@ export default function Sketch({ params }: Readonly<Properties>) {
       <Suspense>
         <SketchResult sketchId={sketchId} />
       </Suspense>
-      <div className="flex gap-2">
-        <Link className="grow" href="/draw">
-          <Button className="w-full">테스트하기</Button>
-        </Link>
-        <ShareButton />
-      </div>
+      <ShareButton />
       <Button variant="outline">
         <Link href="https://www.buymeacoffee.com/hyunmin.dev">
-          ☕️ 커피 한 잔 사주기
+          ☕️ 개발자에게 커피 한 잔 사주기
         </Link>
       </Button>
+      <Link className="grow" href="/draw">
+        <Button className="w-full">테스트하기</Button>
+      </Link>
     </>
   );
 }
