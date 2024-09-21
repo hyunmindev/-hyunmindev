@@ -7,7 +7,7 @@ module.exports = {
     require.resolve('@hyunmin-dev/style-guide/eslint/next'),
     require.resolve('@hyunmin-dev/style-guide/eslint/tailwind'),
   ],
-  ignorePatterns: ['next-env.d.ts'],
+  ignorePatterns: ['next-env.d.ts', 'app/_types/supabase.ts'],
   overrides: [
     {
       extends: [require.resolve('@hyunmin-dev/style-guide/eslint/typescript')],

@@ -11,6 +11,7 @@ import {
 } from 'react-sketch-canvas';
 import { useLocalStorage, useMount, useVibrate } from 'react-use';
 
+import { LOCAL_STORAGE_KEY } from '~/_constants';
 import { type AnalyzeParameters, type DrawMode } from '~/_types';
 import { getAnalyzeParameters } from '~/_utils';
 import { metch } from '~/_utils/metch';
@@ -26,8 +27,9 @@ export default function Draw() {
 
   const router = useRouter();
 
-  const [localPaths, setLocalPaths, removeLocalPaths] =
-    useLocalStorage<CanvasPath[]>('paths');
+  const [localPaths, setLocalPaths, removeLocalPaths] = useLocalStorage<
+    CanvasPath[]
+  >(LOCAL_STORAGE_KEY.PATHS);
 
   useMount(() => {
     canvasReference.current?.loadPaths(localPaths ?? []);

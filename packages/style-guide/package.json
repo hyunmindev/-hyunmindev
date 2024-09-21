@@ -6,6 +6,9 @@
     "eslint",
     "prettier"
   ],
+  "scripts": {
+    "lint": "eslint . --ext .js"
+  },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.2.13",
     "@tanstack/eslint-plugin-query": "^5.57.0",
