@@ -44,16 +44,16 @@ export default function Sketch({ params }: Readonly<Properties>) {
       </div>
       <Suspense>
         <SketchResult sketchId={sketchId} />
-      </Suspense>
-      <ShareButton />
-      <Button variant="outline">
-        <Link href="https://www.buymeacoffee.com/hyunmin.dev">
-          ☕️ 개발자에게 커피 한 잔 사주기
+        <ShareButton />
+        <Button variant="outline">
+          <Link href="https://www.buymeacoffee.com/hyunmin.dev">
+            ☕️ 개발자에게 커피 한 잔 사주기
+          </Link>
+        </Button>
+        <Link className="grow" href="/draw">
+          <Button className="w-full">테스트하기</Button>
         </Link>
-      </Button>
-      <Link className="grow" href="/draw">
-        <Button className="w-full">테스트하기</Button>
-      </Link>
+      </Suspense>
     </>
   );
 }
