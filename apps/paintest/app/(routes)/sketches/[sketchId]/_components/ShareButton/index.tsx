@@ -3,7 +3,7 @@
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
 import { useParams } from 'next/navigation';
 
-import { SHARE_TEXT, SHARE_TITLE } from '~/_constants/meta';
+import { shareSketch } from '~/_utils';
 
 export function ShareButton() {
   const { sketchId } = useParams<{ sketchId: string }>();
@@ -11,11 +11,7 @@ export function ShareButton() {
   return (
     <Button
       onClick={() => {
-        void navigator.share({
-          text: SHARE_TEXT,
-          title: SHARE_TITLE,
-          url: `${window.location.origin}/sketches/${sketchId}`,
-        });
+        shareSketch({ sketchId });
       }}
       variant="outline"
     >

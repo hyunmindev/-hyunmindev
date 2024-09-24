@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { Toaster } from '@hyunmin-dev/ui/components/ui/sonner';
 import { Analytics } from '@vercel/analytics/react';
 import { type ReactNode } from 'react';
 
@@ -27,6 +28,7 @@ export default function Layout({ children }: Readonly<Properties>) {
         <footer className="m-1 text-center text-sm">
           ⓒ 2024. hyunmin All Rights Reserved.
         </footer>
+        <Toaster />
         <Analytics />
       </body>
     </html>

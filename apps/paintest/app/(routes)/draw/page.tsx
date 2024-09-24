@@ -54,8 +54,9 @@ export default function Draw() {
       setError('에러가 발생했습니다. 새로고침 해주세요. 😢');
       return;
     }
-    const { image, sketchingTime, strokeCount } =
-      await getAnalyzeParameters(canvas);
+    const { image, sketchingTime, strokeCount } = await getAnalyzeParameters({
+      canvas,
+    });
     if (strokeCount < 4 || sketchingTime < 4000) {
       setError('정확한 테스트를 위해 조금만 더 그려주세요! 🎨');
       return;
