@@ -13,7 +13,7 @@ export function SketchToolbar() {
     <div className="flex flex-wrap gap-2">
       <Button
         onClick={() => {
-          shareSketch({ sketchId });
+          void shareSketch({ sketchId });
         }}
         size="icon"
         variant="outline"

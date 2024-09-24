@@ -11,7 +11,7 @@ export function ShareButton() {
   return (
     <Button
       onClick={() => {
-        shareSketch({ sketchId });
+        void shareSketch({ sketchId });
       }}
       variant="outline"
     >
