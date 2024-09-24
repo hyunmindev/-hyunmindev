@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@hyunmin-dev/ui/components/ui/button';
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -11,10 +10,10 @@ import {
 } from 'react-sketch-canvas';
 import { useLocalStorage, useMount, useVibrate } from 'react-use';
 
+import { api } from '~/_configs/trpc/react';
 import { LOCAL_STORAGE_KEY } from '~/_constants';
-import { type AnalyzeParameters, type DrawMode } from '~/_types';
+import { type DrawMode } from '~/_types';
 import { getAnalyzeParameters } from '~/_utils';
-import { metch } from '~/_utils/metch';
 
 import { DrawToolbox } from './_components/DrawToolbox';
 
@@ -46,10 +45,7 @@ export default function Draw() {
   const [isComplete, setIsComplete] = useState(false);
   useVibrate(isComplete, [50, 50], false);
 
-  const { isPending, mutateAsync } = useMutation({
-    mutationFn: async (body: AnalyzeParameters) =>
-      metch<string>({ body, method: 'POST', path: '/api/v1/analyze' }),
-  });
+  const createSketchMutation = api.sketches.create.useMutation();
 
   const handleClick = async () => {
     setError(undefined);
@@ -65,7 +61,11 @@ export default function Draw() {
       return;
     }
     try {
-      const sketchId = await mutateAsync({ image, sketchingTime, strokeCount });
+      const sketchId = await createSketchMutation.mutateAsync({
+        image,
+        sketchingTime,
+        strokeCount,
+      });
       setIsComplete(true);
       removeLocalPaths();
       router.push(`/sketches/${sketchId}`);
@@ -112,8 +112,12 @@ export default function Draw() {
           withTimestamp
         />
       </div>
-      <Button className="w-full" disabled={isPending} onClick={handleClick}>
-        {isPending ? '분석 중...' : '분석하기'}
+      <Button
+        className="w-full"
+        disabled={createSketchMutation.isPending}
+        onClick={handleClick}
+      >
+        {createSketchMutation.isPending ? '분석 중...' : '분석하기'}
       </Button>
       <p className="text-sm text-destructive">{error}</p>
     </>

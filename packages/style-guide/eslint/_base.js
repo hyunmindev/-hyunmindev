@@ -16,14 +16,17 @@ module.exports = {
     },
   ],
   rules: {
+    camelcase: ['error', { ignoreImports: true, properties: 'never' }],
     'import/no-cycle': 'off',
     'import/no-named-as-default': 'off',
     'import/order': 'off',
+    'no-console': ['error', { allow: ['error', 'info'] }],
     'no-implicit-coercion': ['error', { allow: ['!!'] }],
     'prefer-destructuring': 'error',
     quotes: ['error', 'single', { avoidEscape: true }],
     'sonarjs/deprecation': 'off',
     'sonarjs/no-misused-promises': 'off',
     'sonarjs/no-redundant-type-constituents': 'off',
+    'sonarjs/pseudo-random': 'off',
   },
 };

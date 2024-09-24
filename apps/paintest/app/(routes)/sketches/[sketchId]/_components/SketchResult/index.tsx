@@ -1,13 +1,14 @@
 import { cn } from '@hyunmin-dev/ui/libs/utils';
 
-import { selectSketch } from '~/_services/supabase';
+import { api } from '~/_configs/trpc/server';
 
 interface Properties {
   sketchId: string;
 }
 
 export async function SketchResult({ sketchId }: Readonly<Properties>) {
-  const sketch = await selectSketch({ sketchId });
+  const sketch = await api.sketches.detail({ sketchId });
+
   return (
     <div
       className={cn(

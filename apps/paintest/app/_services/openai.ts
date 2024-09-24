@@ -1,4 +1,4 @@
-import type { AnalyzeParameters } from '~/_types';
+import type { AnalyzeParameters } from '~/_types/schemas';
 
 import { openai } from '~/_configs/openai';
 import { SYSTEM_MESSAGE } from '~/_constants/openai';

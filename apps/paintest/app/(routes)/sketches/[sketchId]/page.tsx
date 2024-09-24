@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
-import { SKETCH_DESCRIPTION, TITLE } from '~/_constants/meta';
+import { BASE_URL, SKETCH_DESCRIPTION, TITLE } from '~/_constants/meta';
 
 import { ShareButton } from './_components/ShareButton';
 import { SketchResult } from './_components/SketchResult';
@@ -20,6 +20,7 @@ export function generateMetadata({ params }: Properties): Metadata {
   const { sketchId } = params;
   return {
     description: SKETCH_DESCRIPTION,
+    metadataBase: new URL(BASE_URL),
     openGraph: {
       images: [`/storage/sketches/${sketchId}`],
     },
@@ -57,3 +58,5 @@ export default function Sketch({ params }: Readonly<Properties>) {
     </>
   );
 }
+
+export const dynamic = 'force-static';

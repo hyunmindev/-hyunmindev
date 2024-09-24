@@ -12,9 +12,11 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    VERCEL_URL: process.env.VERCEL_URL,
   },
   server: {
     NODE_ENV: z.enum(['development', 'production']).default('development'),
     OPENAI_API_KEY: z.string(),
+    VERCEL_URL: z.string().optional(),
   },
 });

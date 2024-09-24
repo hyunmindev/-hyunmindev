@@ -1,6 +1,6 @@
 import type { ReactSketchCanvasRef } from 'react-sketch-canvas';
 
-import { type AnalyzeParameters } from '~/_types';
+import { type AnalyzeParameters } from '~/_types/schemas';
 
 export const base64ToBlob = (base64: string, mimeType = 'image/png') => {
   const [, base64Data] = base64.split(',');

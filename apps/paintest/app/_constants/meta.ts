@@ -1,3 +1,4 @@
+export const BASE_URL = 'https://paintest.vercel.app';
 export const TITLE = 'AI 그림 심리 테스트';
 export const DESCRIPTION =
   '당신의 그림을 분석하여 성격, 심리 상태, 잠재력을 해석합니다.';
