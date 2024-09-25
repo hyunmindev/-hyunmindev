@@ -21,7 +21,7 @@
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.445.0",
+    "lucide-react": "^0.446.0",
     "next-themes": "^0.3.0",
     "postcss": "^8.4.47",
     "react-hook-form": "^7.53.0",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@hyunmin-dev/style-guide": "workspace:*",
     "@hyunmin-dev/tsconfig": "workspace:*",
-    "@types/node": "^22.6.1",
-    "@types/react": "^18.3.8"
+    "@types/node": "^22.7.0",
+    "@types/react": "^18.3.9"
   }
 }
