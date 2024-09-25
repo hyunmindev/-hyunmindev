@@ -1,8 +1,7 @@
-import { Gaegu } from 'next/font/google';
+import localFont from 'next/font/local';
 
-export const gaegu = Gaegu({
+export const jooreeletter = localFont({
   display: 'block',
-  subsets: ['latin'],
-  variable: '--font-gaegu',
-  weight: '300',
+  src: './jooreeletter.woff2',
+  variable: '--font-jooreeletter',
 });

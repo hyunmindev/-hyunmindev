@@ -6,7 +6,7 @@ import { type ReactNode } from 'react';
 
 import { TRPCReactProvider } from '~/_configs/trpc/react';
 import { DESCRIPTION, TITLE } from '~/_constants/meta';
-import { gaegu } from '~/_styles/fonts';
+import { jooreeletter } from '~/_styles/fonts';
 import '~/_styles/globals.css';
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ interface Properties {
 
 export default function Layout({ children }: Readonly<Properties>) {
   return (
-    <html className={gaegu.variable} lang="ko">
+    <html className={jooreeletter.variable} lang="ko">
       <body className="m-auto flex min-h-screen max-w-screen-sm flex-col text-xl">
         <main className="flex size-full grow flex-col gap-4 p-6">
           <TRPCReactProvider>{children}</TRPCReactProvider>
