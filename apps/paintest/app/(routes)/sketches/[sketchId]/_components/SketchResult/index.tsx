@@ -9,7 +9,7 @@ interface Properties {
 }
 
 export async function SketchResult({ sketchId }: Readonly<Properties>) {
-  const sketch = await api.sketches.detail({ sketchId });
+  const { result } = await api.sketches.detail({ sketchId });
 
   return (
     <Markdown
@@ -19,7 +19,7 @@ export async function SketchResult({ sketchId }: Readonly<Properties>) {
       )}
       rehypePlugins={[rehypeRaw]}
     >
-      {sketch.result}
+      {result}
     </Markdown>
   );
 }

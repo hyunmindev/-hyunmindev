@@ -8,7 +8,7 @@ import {
   ReactSketchCanvas,
   type ReactSketchCanvasRef,
 } from 'react-sketch-canvas';
-import { useLocalStorage, useMount, useVibrate } from 'react-use';
+import { useLocalStorage, useMount } from 'react-use';
 
 import { api } from '~/_configs/trpc/react';
 import { LOCAL_STORAGE_KEY } from '~/_constants';
@@ -23,6 +23,7 @@ export default function Draw() {
   const [strokeColor, setStrokeColor] = useState<string>('#8B4513');
   const [mode, setMode] = useState<DrawMode>('stroke');
   const [error, setError] = useState<string>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -42,13 +43,15 @@ export default function Draw() {
     setError(undefined);
   }, [mode, strokeColor]);
 
-  const [isComplete, setIsComplete] = useState(false);
-  useVibrate(isComplete, [50, 50], false);
+  useEffect(() => {
+    setIsLoading(false);
+  }, [error]);
 
   const createSketchMutation = api.sketches.create.useMutation();
 
   const handleClick = async () => {
     setError(undefined);
+    setIsLoading(true);
     const canvas = canvasReference.current;
     if (!canvas) {
       setError('에러가 발생했습니다. 새로고침 해주세요. 😢');
@@ -67,7 +70,6 @@ export default function Draw() {
         sketchingTime,
         strokeCount,
       });
-      setIsComplete(true);
       removeLocalPaths();
       router.push(`/sketches/${sketchId}`);
     } catch {
@@ -113,12 +115,8 @@ export default function Draw() {
           withTimestamp
         />
       </div>
-      <Button
-        className="w-full"
-        disabled={createSketchMutation.isPending}
-        onClick={handleClick}
-      >
-        {createSketchMutation.isPending ? '분석 중...' : '분석하기'}
+      <Button className="w-full" disabled={isLoading} onClick={handleClick}>
+        {isLoading ? '분석 중...' : '분석하기'}
       </Button>
       <p className="text-sm text-destructive">{error}</p>
     </>
