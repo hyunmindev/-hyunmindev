@@ -1,0 +1,17 @@
+{
+  "extends": "@hyunmin-dev/tsconfig/next.json",
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["./app/*"]
+    },
+    "declaration": false
+  },
+  "include": [
+    "next-env.d.ts",
+    "next.config.mjs",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
