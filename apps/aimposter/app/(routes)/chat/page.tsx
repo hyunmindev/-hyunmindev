@@ -17,8 +17,8 @@ import {
   FormMessage,
 } from '@hyunmin-dev/ui/components/ui/form';
 import { Input } from '@hyunmin-dev/ui/components/ui/input';
-import { useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { nanoid } from 'nanoid';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMount } from 'react-use';
 import { z } from 'zod';
@@ -40,44 +40,32 @@ type FormValues = z.infer<typeof formSchema>;
 
 const supabase = createBrowserClient();
 
-export default function Index() {
+export default function Chat() {
   const form = useForm<FormValues>({
     defaultValues: {
       message: '',
     },
     resolver: zodResolver(formSchema),
   });
-  const [messages, setMessages] = useState<string[]>([]);
-  const searchParameters = useSearchParams();
-  const name = useMemo(
-    () => searchParameters.get('name') ?? undefined,
-    [searchParameters],
-  );
+  const [messages, setMessages] = useState<{ id: string; text: string }[]>([]);
 
   useMount(() => {
-    const realtimeChannel = supabase
+    supabase
       .channel('chat')
-      .on<{ message: string }>(
+      .on<{ id: string; text: string }>(
         'broadcast',
         { event: 'message' },
         ({ payload }) => {
-          setMessages((previousMessages) => [
-            ...previousMessages,
-            payload.message,
-          ]);
+          setMessages((previousMessages) => [...previousMessages, payload]);
         },
       )
       .subscribe();
-
-    return async () => {
-      await realtimeChannel.unsubscribe();
-    };
   });
 
   const onSubmit = async (values: FormValues) => {
     await supabase.channel('chat').send({
       event: 'message',
-      payload: values,
+      payload: { id: nanoid(), text: values.message },
       type: 'broadcast',
     });
   };
@@ -101,10 +89,13 @@ export default function Index() {
           <ChatBubbleAvatar fallback="AI" />
           <ChatBubbleMessage isLoading />
         </ChatBubble>
-        {messages.map((message) => (
-          <ChatBubble key={message} variant="sent">
-            <ChatBubbleAvatar fallback={name} />
-            <ChatBubbleMessage>{message}</ChatBubbleMessage>
+        {messages.map(({ id, text }) => (
+          <ChatBubble
+            key={id}
+            variant="sent"
+          >
+            <ChatBubbleAvatar fallback="A" />
+            <ChatBubbleMessage>{text}</ChatBubbleMessage>
           </ChatBubble>
         ))}
       </ChatMessageList>
@@ -120,12 +111,19 @@ export default function Index() {
               <FormItem className="grow">
                 <FormMessage />
                 <FormControl>
-                  <Input className="h-14 text-2xl" {...field} />
+                  <Input
+                    className="h-14 text-2xl"
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
           />
-          <Button className="h-14" type="submit" variant="outline">
+          <Button
+            className="h-14"
+            type="submit"
+            variant="outline"
+          >
             <Send className="stroke-muted-foreground" />
           </Button>
         </form>
