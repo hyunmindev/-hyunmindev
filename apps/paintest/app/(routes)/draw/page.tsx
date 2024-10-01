@@ -115,7 +115,11 @@ export default function Draw() {
           withTimestamp
         />
       </div>
-      <Button className="w-full" disabled={isLoading} onClick={handleClick}>
+      <Button
+        className="w-full"
+        disabled={isLoading}
+        onClick={handleClick}
+      >
         {isLoading ? '분석 중...' : '분석하기'}
       </Button>
       <p className="text-sm text-destructive">{error}</p>

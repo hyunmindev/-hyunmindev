@@ -51,7 +51,10 @@ export default function Sketch({ params }: Readonly<Properties>) {
             ☕️ 개발자에게 커피 한 잔 사주기
           </Link>
         </Button>
-        <Link className="grow" href="/draw">
+        <Link
+          className="grow"
+          href="/draw"
+        >
           <Button className="w-full">테스트하기</Button>
         </Link>
       </Suspense>

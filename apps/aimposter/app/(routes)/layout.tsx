@@ -20,7 +20,10 @@ interface Properties {
 
 export default function Layout({ children }: Readonly<Properties>) {
   return (
-    <html className={notoSansKr.variable} lang="ko">
+    <html
+      className={notoSansKr.variable}
+      lang="ko"
+    >
       <body className="m-auto flex min-h-screen max-w-screen-sm flex-col">
         <main className="flex grow flex-col gap-4 p-6">
           <TRPCReactProvider>{children}</TRPCReactProvider>

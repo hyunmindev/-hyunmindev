@@ -20,8 +20,14 @@ export function SketchToolbar() {
       >
         <Share className="stroke-muted-foreground" />
       </Button>
-      <Button size="icon" variant="outline">
-        <a download="나무.png" href={`/storage/sketches/${sketchId}`}>
+      <Button
+        size="icon"
+        variant="outline"
+      >
+        <a
+          download="나무.png"
+          href={`/storage/sketches/${sketchId}`}
+        >
           <Save className="stroke-muted-foreground" />
         </a>
       </Button>

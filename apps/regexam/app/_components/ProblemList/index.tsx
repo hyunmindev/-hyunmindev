@@ -52,7 +52,10 @@ export function ProblemList({ control }: Readonly<Properties>) {
   return (
     <ul className="flex flex-col gap-1 text-xl">
       {list.map(({ items, key }) => (
-        <li className="p-2" key={key}>
+        <li
+          className="p-2"
+          key={key}
+        >
           {items.map(({ isMatch, str }) => (
             <span
               className={cn({

@@ -33,7 +33,10 @@ export function RegexForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input {...field} className="h-16 text-4xl" />
+                <Input
+                  {...field}
+                  className="h-16 text-4xl"
+                />
               </FormControl>
               <div className="h-4">
                 <FormMessage />
