@@ -1,7 +1,7 @@
-import { Noto_Sans_KR } from 'next/font/google';
+import { Noto_Sans_Mono } from 'next/font/google';
 
-export const notoSansKr = Noto_Sans_KR({
+export const notoSansMono = Noto_Sans_Mono({
   display: 'block',
   subsets: ['latin'],
-  variable: '--font-noto-sans-kr',
+  variable: '--font-noto-sans-mono',
 });

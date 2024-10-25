@@ -18,6 +18,7 @@ module.exports = {
       { checksVoidReturn: { attributes: false } },
     ],
     '@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true }],
+    'unicorn/no-useless-promise-resolve-reject': 'off',
     'unicorn/prevent-abbreviations': [
       'error',
       { allowList: { db: true, env: true } },

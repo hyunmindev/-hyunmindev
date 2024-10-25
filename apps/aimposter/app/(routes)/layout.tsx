@@ -6,7 +6,7 @@ import { type ReactNode } from 'react';
 
 import { TRPCReactProvider } from '~/_configs/trpc/react';
 import { DESCRIPTION, TITLE } from '~/_constants/meta';
-import { notoSansKr } from '~/_styles/fonts';
+import { notoSansMono } from '~/_styles/fonts';
 import '~/_styles/globals.css';
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ interface Properties {
 export default function Layout({ children }: Readonly<Properties>) {
   return (
     <html
-      className={notoSansKr.variable}
+      className={notoSansMono.variable}
       lang="ko"
     >
       <body className="m-auto flex min-h-screen max-w-screen-sm flex-col">

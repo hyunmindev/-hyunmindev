@@ -8,7 +8,7 @@ const SKETCHES = 'sketches';
 
 export const selectSketch = cache(
   async ({ sketchId }: { sketchId: string }) => {
-    const supabase = createServerClient();
+    const supabase = await createServerClient();
     const { data: records } = await supabase
       .from(SKETCHES)
       .select()
@@ -26,7 +26,7 @@ export const insertSketch = async ({
   sketchingTime,
   strokeCount,
 }: TablesInsert<typeof SKETCHES>) => {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: records } = await supabase
     .from(SKETCHES)
     .insert({ id, result, sketchingTime, strokeCount })
@@ -44,6 +44,6 @@ export const uploadSketch = async ({
   file: Blob;
   fileName: string;
 }) => {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   await supabase.storage.from(SKETCHES).upload(fileName, file);
 };

@@ -7,7 +7,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-noto-sans-kr)'],
+        sans: ['var(--font-noto-sans-mono)'],
       },
     },
   },

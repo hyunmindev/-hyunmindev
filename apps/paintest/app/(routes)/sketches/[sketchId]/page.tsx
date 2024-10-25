@@ -10,14 +10,16 @@ import { ShareButton } from './_components/ShareButton';
 import { SketchResult } from './_components/SketchResult';
 import { SketchToolbar } from './_components/SketchToolbar';
 
+type Parameters = Promise<{ sketchId: string }>;
+
 interface Properties {
-  params: {
-    sketchId: string;
-  };
+  params: Parameters;
 }
 
-export function generateMetadata({ params }: Properties): Metadata {
-  const { sketchId } = params;
+export async function generateMetadata({
+  params,
+}: Properties): Promise<Metadata> {
+  const { sketchId } = await params;
   return {
     description: SKETCH_DESCRIPTION,
     metadataBase: new URL(BASE_URL),
@@ -28,8 +30,8 @@ export function generateMetadata({ params }: Properties): Metadata {
   };
 }
 
-export default function Sketch({ params }: Readonly<Properties>) {
-  const { sketchId } = params;
+export default async function Sketch({ params }: Readonly<Properties>) {
+  const { sketchId } = await params;
   return (
     <>
       <h1>심리 테스트 결과! 🎄</h1>
@@ -47,7 +49,10 @@ export default function Sketch({ params }: Readonly<Properties>) {
         <SketchResult sketchId={sketchId} />
         <ShareButton />
         <Button variant="outline">
-          <Link href="https://www.buymeacoffee.com/hyunmin.dev">
+          <Link
+            href="https://www.buymeacoffee.com/hyunmin.dev"
+            target="_blank"
+          >
             ☕️ 개발자에게 커피 한 잔 사주기
           </Link>
         </Button>

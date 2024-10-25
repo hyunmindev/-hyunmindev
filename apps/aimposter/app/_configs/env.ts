@@ -8,6 +8,7 @@ export const env = createEnv({
   },
   emptyStringAsUndefined: true,
   runtimeEnv: {
+    ANALYZE: process.env.ANALYZE,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
@@ -15,6 +16,7 @@ export const env = createEnv({
     VERCEL_URL: process.env.VERCEL_URL,
   },
   server: {
+    ANALYZE: z.enum(['true', 'false']).optional(),
     NODE_ENV: z.enum(['development', 'production']).default('development'),
     OPENAI_API_KEY: z.string(),
     VERCEL_URL: z.string().optional(),
