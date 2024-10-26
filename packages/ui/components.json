@@ -12,6 +12,9 @@
   },
   "aliases": {
     "components": "@hyunmin-dev/ui/components",
-    "utils": "@hyunmin-dev/ui/libs/utils"
+    "utils": "@hyunmin-dev/ui/libs/utils",
+    "ui": "@hyunmin-dev/ui/components/ui",
+    "lib": "@hyunmin-dev/ui/libs",
+    "hooks": "@hyunmin-dev/ui/hooks"
   }
 }

@@ -18,84 +18,60 @@ import {
 } from '@hyunmin-dev/ui/components/ui/form';
 import { Input } from '@hyunmin-dev/ui/components/ui/input';
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMount } from 'react-use';
-import { z } from 'zod';
+import { useSessionStorage } from 'react-use';
 
 import { createBrowserClient } from '~/_configs/supabase/browser';
-
-const formSchema = z.object({
-  message: z
-    .string()
-    .min(2, {
-      message: '메시지는 최소 2글자 이상이어야 합니다.',
-    })
-    .max(30, {
-      message: '메시지는 최대 30글자 이하여야 합니다.',
-    }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { type Message } from '~/_types';
+import { chatFormSchema, type ChatFormValues } from '~/_types/schemas';
 
 const supabase = createBrowserClient();
 
 export default function Chat() {
-  const form = useForm<FormValues>({
-    defaultValues: {
-      message: '',
-    },
-    resolver: zodResolver(formSchema),
-  });
-  const [messages, setMessages] = useState<{ id: string; text: string }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [user] = useSessionStorage('user', nanoid());
 
-  useMount(() => {
-    supabase
+  const form = useForm<ChatFormValues>({
+    defaultValues: { message: '' },
+    resolver: zodResolver(chatFormSchema),
+  });
+
+  useEffect(() => {
+    const channel = supabase
       .channel('chat')
-      .on<{ id: string; text: string }>(
-        'broadcast',
-        { event: 'message' },
-        ({ payload }) => {
+      .on<Message>('broadcast', { event: 'message' }, ({ payload }) => {
+        if (payload.user !== user) {
           setMessages((previousMessages) => [...previousMessages, payload]);
-        },
-      )
+        }
+      })
       .subscribe();
-  });
+    return () => {
+      void channel.unsubscribe();
+    };
+  }, []);
 
-  const onSubmit = async (values: FormValues) => {
-    await supabase.channel('chat').send({
-      event: 'message',
-      payload: { id: nanoid(), text: values.message },
-      type: 'broadcast',
-    });
+  const onSubmit = async (values: ChatFormValues) => {
+    const id = nanoid();
+    const text = values.message;
+    const newMessage = { id, text, user };
+    setMessages((previousMessages) => [...previousMessages, newMessage]);
+    form.reset();
+    await supabase
+      .channel('chat')
+      .send({ event: 'message', payload: newMessage, type: 'broadcast' });
   };
 
   return (
     <>
       <ChatMessageList className="grow">
-        <ChatBubble variant="sent">
-          <ChatBubbleAvatar fallback="US" />
-          <ChatBubbleMessage variant="sent">
-            Hello, how has your day been? I hope you are doing well.
-          </ChatBubbleMessage>
-        </ChatBubble>
-        <ChatBubble variant="received">
-          <ChatBubbleAvatar fallback="AI" />
-          <ChatBubbleMessage variant="received">
-            Hi, I am doing well, thank you for asking. How can I help you today?
-          </ChatBubbleMessage>
-        </ChatBubble>
-        <ChatBubble variant="received">
-          <ChatBubbleAvatar fallback="AI" />
-          <ChatBubbleMessage isLoading />
-        </ChatBubble>
-        {messages.map(({ id, text }) => (
+        {messages.map((message) => (
           <ChatBubble
-            key={id}
-            variant="sent"
+            key={message.id}
+            variant={message.user === user ? 'sent' : 'received'}
           >
-            <ChatBubbleAvatar fallback="A" />
-            <ChatBubbleMessage>{text}</ChatBubbleMessage>
+            <ChatBubbleAvatar fallback={message.user === user ? 'ME' : 'AI'} />
+            <ChatBubbleMessage>{message.text}</ChatBubbleMessage>
           </ChatBubble>
         ))}
       </ChatMessageList>
