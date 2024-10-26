@@ -2,10 +2,9 @@ import { z } from 'zod';
 
 import { createTRPCRouter, publicProcedure } from '~/_server/api/trpc';
 import { selectSketch } from '~/_services/supabase';
-import { analyzeParametersSchema } from '~/_types/schemas';
 
 export const sketchesRouter = createTRPCRouter({
-  create: publicProcedure.input(analyzeParametersSchema).mutation(async () => {
+  create: publicProcedure.mutation(async () => {
     // Upload the sketch to Supabase
   }),
 
