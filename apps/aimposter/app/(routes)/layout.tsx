@@ -25,12 +25,9 @@ export default function Layout({ children }: Readonly<Properties>) {
       lang="ko"
     >
       <body className="m-auto flex min-h-screen max-w-screen-sm flex-col">
-        <main className="flex grow flex-col gap-4 p-6">
+        <main className="flex grow flex-col">
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </main>
-        <footer className="m-1 text-center text-sm text-muted">
-          ⓒ 2024. hyunmin All Rights Reserved.
-        </footer>
         <Toaster />
         <Analytics />
       </body>

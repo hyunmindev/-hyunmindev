@@ -17,8 +17,10 @@ import {
   FormMessage,
 } from '@hyunmin-dev/ui/components/ui/form';
 import { Input } from '@hyunmin-dev/ui/components/ui/input';
+import { ScrollArea } from '@hyunmin-dev/ui/components/ui/scroll-area';
+import { Separator } from '@hyunmin-dev/ui/components/ui/separator';
 import { nanoid } from 'nanoid';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSessionStorage } from 'react-use';
 
@@ -29,6 +31,7 @@ import { chatFormSchema, type ChatFormValues } from '~/_types/schemas';
 const supabase = createBrowserClient();
 
 export default function Chat() {
+  const listReference = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [user] = useSessionStorage('user', nanoid());
 
@@ -41,21 +44,29 @@ export default function Chat() {
     const channel = supabase
       .channel('chat')
       .on<Message>('broadcast', { event: 'message' }, ({ payload }) => {
-        if (payload.user !== user) {
-          setMessages((previousMessages) => [...previousMessages, payload]);
+        if (payload.user === user) {
+          return;
         }
+        setMessages((previousMessages) => [...previousMessages, payload]);
       })
       .subscribe();
     return () => {
       void channel.unsubscribe();
     };
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    listReference.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, [messages.length]);
 
   const onSubmit = async (values: ChatFormValues) => {
     const id = nanoid();
     const text = values.message;
     const newMessage = { id, text, user };
-    setMessages((previousMessages) => [...previousMessages, newMessage]);
+    setMessages([...messages, newMessage]);
     form.reset();
     await supabase
       .channel('chat')
@@ -64,20 +75,28 @@ export default function Chat() {
 
   return (
     <>
-      <ChatMessageList className="grow">
-        {messages.map((message) => (
-          <ChatBubble
-            key={message.id}
-            variant={message.user === user ? 'sent' : 'received'}
-          >
-            <ChatBubbleAvatar fallback={message.user === user ? 'ME' : 'AI'} />
-            <ChatBubbleMessage>{message.text}</ChatBubbleMessage>
-          </ChatBubble>
-        ))}
-      </ChatMessageList>
+      <ScrollArea className="h-0 grow">
+        <ChatMessageList
+          className="grow"
+          ref={listReference}
+        >
+          {messages.map((message) => (
+            <ChatBubble
+              key={message.id}
+              variant={message.user === user ? 'sent' : 'received'}
+            >
+              <ChatBubbleAvatar
+                fallback={message.user === user ? 'ME' : 'AI'}
+              />
+              <ChatBubbleMessage>{message.text}</ChatBubbleMessage>
+            </ChatBubble>
+          ))}
+        </ChatMessageList>
+      </ScrollArea>
+      <Separator />
       <Form {...form}>
         <form
-          className="flex w-full items-end gap-2"
+          className="flex items-end gap-2 p-2"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
