@@ -24,8 +24,8 @@ export default function Layout({ children }: Readonly<Properties>) {
       className={notoSansMono.variable}
       lang="ko"
     >
-      <body className="m-auto flex min-h-screen max-w-screen-sm flex-col">
-        <main className="flex grow flex-col">
+      <body className="m-auto max-w-screen-sm">
+        <main>
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </main>
         <Toaster />

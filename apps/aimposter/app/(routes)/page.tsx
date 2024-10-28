@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Index() {
   return (
-    <div className="flex grow flex-col items-center justify-center gap-4">
+    <div className="flex h-screen w-screen items-center justify-center">
       <Button
         asChild
         className="h-14"

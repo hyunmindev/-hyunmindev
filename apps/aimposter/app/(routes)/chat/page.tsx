@@ -14,13 +14,12 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
 } from '@hyunmin-dev/ui/components/ui/form';
 import { Input } from '@hyunmin-dev/ui/components/ui/input';
 import { ScrollArea } from '@hyunmin-dev/ui/components/ui/scroll-area';
-import { Separator } from '@hyunmin-dev/ui/components/ui/separator';
+import { cn } from '@hyunmin-dev/ui/libs/utils';
 import { nanoid } from 'nanoid';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSessionStorage } from 'react-use';
 
@@ -31,7 +30,6 @@ import { chatFormSchema, type ChatFormValues } from '~/_types/schemas';
 const supabase = createBrowserClient();
 
 export default function Chat() {
-  const listReference = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [user] = useSessionStorage('user', nanoid());
 
@@ -56,10 +54,7 @@ export default function Chat() {
   }, [user]);
 
   useEffect(() => {
-    listReference.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
+    window.scrollTo({ behavior: 'smooth', top: document.body.scrollHeight });
   }, [messages.length]);
 
   const onSubmit = async (values: ChatFormValues) => {
@@ -75,11 +70,8 @@ export default function Chat() {
 
   return (
     <>
-      <ScrollArea className="h-0 grow">
-        <ChatMessageList
-          className="grow"
-          ref={listReference}
-        >
+      <ScrollArea className="mb-16">
+        <ChatMessageList>
           {messages.map((message) => (
             <ChatBubble
               key={message.id}
@@ -93,10 +85,9 @@ export default function Chat() {
           ))}
         </ChatMessageList>
       </ScrollArea>
-      <Separator />
       <Form {...form}>
         <form
-          className="flex items-end gap-2 p-2"
+          className="fixed inset-x-0 bottom-0 flex items-end gap-2 p-2"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
@@ -104,10 +95,9 @@ export default function Chat() {
             name="message"
             render={({ field }) => (
               <FormItem className="grow">
-                <FormMessage />
                 <FormControl>
                   <Input
-                    className="h-14 text-2xl"
+                    className="h-14 bg-background/80 text-xl backdrop-blur focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0"
                     {...field}
                   />
                 </FormControl>
@@ -115,11 +105,16 @@ export default function Chat() {
             )}
           />
           <Button
-            className="h-14"
+            className="h-14 bg-background/80 backdrop-blur"
             type="submit"
             variant="outline"
           >
-            <Send className="stroke-muted-foreground" />
+            <Send
+              className={cn({
+                'stroke-muted': !form.formState.isValid,
+                'stroke-muted-foreground': form.formState.isValid,
+              })}
+            />
           </Button>
         </form>
       </Form>

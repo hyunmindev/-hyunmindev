@@ -9,7 +9,6 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/regexam/.turbo" />
       <excludeFolder url="file://$MODULE_DIR$/packages/ui/.turbo" />
       <excludeFolder url="file://$MODULE_DIR$/apps/paintest/.turbo" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/ui" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
