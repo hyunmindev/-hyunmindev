@@ -24,7 +24,7 @@ export default function Layout({ children }: Readonly<Properties>) {
       className={notoSansMono.variable}
       lang="ko"
     >
-      <body className="m-auto max-w-screen-sm">
+      <body>
         <main>
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </main>

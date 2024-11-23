@@ -5,12 +5,10 @@ import Link from 'next/link';
 
 export default function Index() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-screen items-center justify-center">
       <Button
         asChild
-        className="h-14"
-        type="submit"
-        variant="outline"
+        size="lg"
       >
         <Link href="/chat">채팅방 입장</Link>
       </Button>
